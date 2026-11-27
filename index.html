@@ -2604,6 +2604,8 @@ function footInit(){if(document.querySelector(".sitefoot"))return;const w=docume
 const LANDQ="(orientation: landscape) and (max-height: 520px) and (pointer: coarse)";
 // 가로 판정은 화면(기기) 방향으로: 키보드가 올라와 창 높이가 줄어도 가로로 착각하지 않게
 function isLand(){if(!window.matchMedia("(pointer: coarse)").matches)return false;const o=screen.orientation&&screen.orientation.type;const L=o?o.startsWith("landscape"):(Math.abs(window.orientation||0)===90);return L&&Math.min(screen.width,screen.height)<=520}
+// 카카오톡·삼성 인터넷 등에서 폰 '글자 크기' 설정 때문에 글씨가 커지면 비율만큼 되돌림
+function fixTextZoom(){try{const b=document.body;b.style.zoom="";const sp=document.createElement("span");sp.style.cssText="position:absolute;left:-9999px;top:0;visibility:hidden;font:400 20px sans-serif;white-space:nowrap";sp.textContent="가나다라마바사아자차ABCDE";b.appendChild(sp);const w=sp.getBoundingClientRect().width;sp.remove();const cx=document.createElement("canvas").getContext("2d");cx.font="400 20px sans-serif";const w0=cx.measureText(sp.textContent).width;const r=w/w0;window.__tz=r;if(r>1.08&&r<3)b.style.zoom=(1/r).toFixed(3)}catch(e){}}
 function mobAuto(){const land=isLand();const want=!land&&window.matchMedia("(max-width: 760px)").matches;document.body.classList.toggle("land",land);document.body.classList.toggle("mob",want);if(want)mobInit();else{const n=document.querySelector(".mnav");if(n)n.remove()}}
 function mobInit(){if(!document.body.classList.contains("mob")||document.querySelector(".mnav"))return;const nav=document.createElement("nav");nav.className="mnav";nav.setAttribute("aria-label","화면 전환");
  nav.innerHTML=`<button data-tab="play">🎮<span>진행</span></button><button data-tab="stat">📊<span>상태</span></button><button data-tab="log">📜<span>기록</span></button>`;document.body.appendChild(nav);document.body.dataset.tab="play";
@@ -2862,7 +2864,7 @@ $("newgame").addEventListener("click",()=>{atTitle=false;const t=document.getEle
 $("wipe").addEventListener("click",()=>{got=[];try{localStorage.setItem(KEY_E,"[]")}catch(e){}render()});
 s=load();
 if(!s||!(s.mode in {turn:1,event:1,result:1,story:1,ending:1,quiz:1,setup:1,intern:1,career:1,alt:1})||(s.mode==="event"&&!EV[s.ev])){s=fresh();s.mode="setup"}
-footInit();mobAuto();const layoutKey=()=>document.body.classList.contains("land")+"|"+document.body.classList.contains("mob");
+footInit();fixTextZoom();mobAuto();const layoutKey=()=>document.body.classList.contains("land")+"|"+document.body.classList.contains("mob");
 function relayout(){const f=document.activeElement;if(f&&/^(INPUT|TEXTAREA)$/.test(f.tagName)){if(!relayout.w){relayout.w=1;f.addEventListener("blur",()=>{relayout.w=0;setTimeout(relayout,300)},{once:true})}return}const a=layoutKey();mobAuto();if(layoutKey()===a)return;render()}
 window.matchMedia("(max-width: 760px)").addEventListener("change",relayout);
 if(screen.orientation&&screen.orientation.addEventListener)screen.orientation.addEventListener("change",relayout);else window.addEventListener("orientationchange",relayout);
