@@ -768,6 +768,8 @@ body.mob .mnav{box-shadow:none}
 .stage{contain:paint}
 .stage.off *{animation-play-state:paused!important}
 body.mob .card,body.mob .stage{box-shadow:3px 3px 0 var(--line)}
+/* 무대는 항상 폭 기준으로 크기 결정 (화면 높이에 따라 흔들리지 않게) */
+.stage{width:100%;height:auto;justify-self:stretch;align-self:start;box-sizing:border-box}
 </style>
 </head>
 <body>
