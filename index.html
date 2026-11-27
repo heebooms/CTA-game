@@ -782,6 +782,8 @@ body.mob .opts.three button small{font-size:10.5px}
 #toShop::before{content:"🛒 "}
 #toShop:hover:not(:disabled){background:#ffc928}
 #toShop:disabled{background:#f3e7bf;border-color:#e5d49a;color:#9a8a55;box-shadow:none}
+.gico{display:inline-block;width:1.25em;margin-right:4px;text-align:center;font-size:1.05em;line-height:1;vertical-align:-1px;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+.chip .gico{margin-right:2px;font-size:.95em}
 </style>
 </head>
 <body>
@@ -936,6 +938,9 @@ const ENDS={
  E_local:{t:"동네 세무사",d:"사장님들이 장부 봉투를 들고 찾아오는 사무소. \"세무사님 덕에 살았어요\"라는 말이 제일 좋다."},
  E_boolbok:{t:"조세불복 전문가",d:"과세처분에 맞서는 일을 맡는다. 세법학 서술형 답안을 쓰던 손이 이제 불복 청구서를 쓴다."},
  E_inhouse:{t:"기업 세무팀",d:"한 회사의 세금을 깊이 들여다보는 사내 세무사. 신고 시즌에도 저녁이 있다."},
+ E_lawfirm:{t:"로펌 조세팀 파트너",d:"대형 로펌 조세팀에 들어가 굵직한 조세 소송을 맡았다. 세무사의 숫자 감각과 변호사의 논리, 둘 다 가진 사람은 흔치 않다."},
+ E_clerk:{t:"법원의 조세 전문가",d:"재판연구원으로 법원에 들어갔다. 세무사 시절 다투던 과세처분을, 이제는 판결문의 언어로 들여다본다."},
+ E_dual:{t:"원스톱 조세 사무소",d:"\"세무사 겸 변호사\" 간판을 걸었다. 기장부터 세무조사 대응, 조세 소송까지. 고객들이 다른 곳에 갈 이유가 없다."},
  E_lawschool:{t:"조세 전문 변호사",d:"변호사시험 합격! 세무사와 변호사 자격을 모두 가진 조세 전문 변호사가 됐다. 3년의 로스쿨이 헛되지 않았다."},
  E_gov:{t:"국세청 조사관",d:"7급 세무직으로 세무서에 들어갔다. 수험 시절 쌓은 세법 실력으로 조사과의 에이스가 됐다."},
  E_lawback:{t:"다시 세무사로",d:"변호사시험의 벽은 높았다. 그래도 로스쿨에서 배운 법은 조세불복 실무의 든든한 무기가 됐다."},
@@ -950,7 +955,7 @@ const ENDS={
  E_sns:{t:"SNS 스타 세무사",d:"슈퍼카 옆에서 찍은 \"세무사가 알려 주는 절세 팁\" 영상이 터졌다. 상담 예약이 석 달 치 밀렸다."},
  E_reset:{t:"다시, 1차부터",d:"유예 기간이 끝났다. 쓰라리지만, 한 번 해 본 길은 두 번째가 더 빠르다."}
 };
-const END_HINT={E_gov:"공무원 시험에 도전한다면…",E_lawback:"로스쿨을 졸업했지만 변시가…",E_landlord:"합격 후 꼬마빌딩을 산다면…",E_debt:"합격 후 돈을 너무 쓴다면…",E_sns:"합격 후 가장 비싼 차를 산다면…",E_partner:"대형 법인에서 끝까지 버틴다면… (평판이 높아야)",E_local:"개업해서 사무소를 키워 간다면…",E_boolbok:"과세당국과 다투는 일이 맞는다면… (평판이 필요)",E_inhouse:"한 회사의 세금만 깊이 들여다본다면…",E_lawschool:"로스쿨에 가서 변호사시험까지 붙는다면…",E_balance:"개업 후 일부러 작게 지킨다면…",E_burnout:"5년 차, 몸이 무겁다고 느낄 때…",E_quit:"1차에 떨어지고 여기서 멈춘다면…",E_couple:"연인과 같은 해에 합격한다면…",E_support:"연인보다 먼저 합격한다면…",E_late:"고백을 시험 뒤로 미룬다면…",E_reset:"유예 기간 안에 2차를 넘지 못하면…"};
+const END_HINT={E_lawfirm:"로스쿨을 마치고 로펌으로 간다면…",E_clerk:"변호사가 되어 법원으로 간다면…",E_dual:"세무사와 변호사를 한 간판에…",E_gov:"공무원 시험에 도전한다면…",E_lawback:"로스쿨을 졸업했지만 변시가…",E_landlord:"합격 후 꼬마빌딩을 산다면…",E_debt:"합격 후 돈을 너무 쓴다면…",E_sns:"합격 후 가장 비싼 차를 산다면…",E_partner:"대형 법인에서 끝까지 버틴다면… (평판이 높아야)",E_local:"개업해서 사무소를 키워 간다면…",E_boolbok:"과세당국과 다투는 일이 맞는다면… (평판이 필요)",E_inhouse:"한 회사의 세금만 깊이 들여다본다면…",E_lawschool:"로스쿨에 가서 변호사시험까지 붙는다면…",E_balance:"개업 후 일부러 작게 지킨다면…",E_burnout:"5년 차, 몸이 무겁다고 느낄 때…",E_quit:"1차에 떨어지고 여기서 멈춘다면…",E_couple:"연인과 같은 해에 합격한다면…",E_support:"연인보다 먼저 합격한다면…",E_late:"고백을 시험 뒤로 미룬다면…",E_reset:"유예 기간 안에 2차를 넘지 못하면…"};
 const KEY_S="taxgame-save9",KEY_E="taxgame-ends",KEY_SP="taxgame-speed";
 const START_Y=2027;
 const R=(a,b)=>a+Math.random()*(b-a);
@@ -962,7 +967,7 @@ const MOBW=f=>isMob()?(Math.round(f/1000)/10)+"만":W(f);
 const KW=n=>{const a=Math.abs(n),sg=n<0?"-":"";return a>=1e8?sg+(Math.round(a/1e7)/10)+"억":a>=1e4?sg+Math.round(a/1e4).toLocaleString("ko-KR")+"만":sg+Math.round(a)+"원"};
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const norm=x=>{const t=String(x).replace(/[\s.,·()'"○%]/g,"").replace(/(이다|입니다)$/,"").toLowerCase();const u=t.replace(/^제(?=\d)/,"").replace(/(과세|세|법|일|개월|년|기|율|표|소송|판결|원칙)$/,"");return u.length?u:t};
-const ACH={first:["첫해 1차 합격","2027년 1차에 한 번에 붙기"],self:["독학 1차 합격","1차 과정 학원 등록 없이 1차 합격"],dong:["동차 합격","1차 합격한 해에 2차까지 합격"],
+const ACH={blind:["소개팅 성공","합격 후 소개팅에서 연인 만들기"],married:["세무사의 결혼식","결혼하기"],baby:["세무사 엄마·아빠","아기 소식 듣기"],first:["첫해 1차 합격","2027년 1차에 한 번에 붙기"],self:["독학 1차 합격","1차 과정 학원 등록 없이 1차 합격"],dong:["동차 합격","1차 합격한 해에 2차까지 합격"],
  nocoffee:["커피 없이 합격","아메리카노를 한 잔도 안 마시고 최종 합격"],nojob:["알바 없이 합격","알바를 하루도 안 하고 최종 합격"],real:["현실 난이도 합격","'현실' 난이도로 최종 합격"],
  bb1:["빌보드 1등","모의고사 빌보드 1등 찍기"],mind100:["멘탈 갑","멘탈 100 달성"],confess:["고백 성공","먼저 고백해서 연애 시작"],
  love:["연애와 합격 둘 다","연애 중에 최종 합격"],allmates:["다 같이 합격","스터디원 모두와 함께 최종 합격"],internS:["에이스 수습","수습 실무 미니게임 S등급"],lens:["10억의 유혹","초고성능 AI 스마트렌즈 구입"],lotto:["인생 역전?","로또 3등 이상 당첨"],car:["첫 차","합격 후 자동차 구입"],home:["내 집 마련","합격 후 집 구입"],rich:["자산가 세무사","순자산 10억 원 달성"]};
@@ -981,7 +986,7 @@ function showPopup(t,x,scene,ch,opt){const el=document.getElementById("popup");i
  const A=scene&&EV_ART[scene]?(evArt(EV_ART[scene])||evArt2(EV_ART[scene])):null;const noImg=scene===null;
  el.innerHTML=`<div class="pp-card" role="status" aria-label="${esc(t)}">${noImg?"":A?`<svg viewBox="0 0 160 90" shape-rendering="crispEdges" preserveAspectRatio="xMidYMid slice">${A}</svg>`:`<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice">${sceneSVG(EV_SCENE[scene]||scene||"study")}</svg>`}<div class="pp-body"><h3>${esc(t)}</h3><p>${esc(x).replace(/\n/g,"<br>")}</p>${chips?`<div class="gains">${chips}</div>`:""}<small>눌러서 닫기</small></div></div>`;
  el.classList.remove("on");void el.offsetWidth;el.classList.add("on");clearTimeout(showPopup.h);showPopup.h=setTimeout(closePopup,opt.dur||4000)}
-const EV_ART={r_cheer1:"call",r_cheer2:"cafe",r_cheer3:"phone",r_cheer4:"question",r_cheer5:"notes",r_cheer6:"notes",r_rumor:"phone",r_newed:"notes",r_teacher:"question",r_omr:"question",r_wrist:"back",r_calc:"broke",r_9gup:"party",r_job:"call",r_cafeq:"phone",r_lunch:"money",r_seat:"cafe",r_apply:"laptop",r_hall:"subway",r_hair:"insomnia",r_suki:"notes",r_rain:"storm",r_proof:"phone",r_vatjob:"money",r_caffeine:"insomnia",s_seol:"family",s_chuseok:"family",r_bday:"family",r_mom:"family",r_reunion:"party",r_friend:"party",s_newyear:"newyear",r_wedding:"wedding",r_cold:"sick",
+const EV_ART={c_blind:"cafe",c_pen:"phone",c_date:"beach",c_baby:"family",r_blind:"cafe",c_ethics:"money",c_inherit:"notes",c_mentor:"cafe",c_refund:"money",c_unpaid:"broke",c_startup:"cafe",c_seminar:"question",c_offer:"call",r_cheer1:"call",r_cheer2:"cafe",r_cheer3:"phone",r_cheer4:"question",r_cheer5:"notes",r_cheer6:"notes",r_rumor:"phone",r_newed:"notes",r_teacher:"question",r_omr:"question",r_wrist:"back",r_calc:"broke",r_9gup:"party",r_job:"call",r_cafeq:"phone",r_lunch:"money",r_seat:"cafe",r_apply:"laptop",r_hall:"subway",r_hair:"insomnia",r_suki:"notes",r_rain:"storm",r_proof:"phone",r_vatjob:"money",r_caffeine:"insomnia",s_seol:"family",s_chuseok:"family",r_bday:"family",r_mom:"family",r_reunion:"party",r_friend:"party",s_newyear:"newyear",r_wedding:"wedding",r_cold:"sick",
  r_allow:"money",r_scholar:"money",r_gig:"money",r_spend:"broke",r_broke:"broke",r_laptop:"laptop",s_xmas:"xmas",s_vacation:"beach",s_summer:"beach",
  r_some:"rooftop",r_confess:"confess",r_theyconfess:"confess",r_fight:"storm",r_breakup:"storm",r_crisis:"storm",r_noise:"noise",r_senior:"cafe",r_mate1:"cafe",r_mate3:"cafe",
  r_triangle:"triangle",c_audit:"news",c_mistake:"broke",c_claim:"storm",c_scout:"cafe",c_invest:"phone",c_health:"sick",c_lecture:"question",c_book:"notes",c_jeonse:"call",c_dinner:"party",c_junior:"cafe",c_fraud:"storm",c_wedding:"wedding",c_parents:"family",c_burn:"insomnia",c_dealer:"money",l_mid:"question",l_moot:"question",l_loan:"broke",l_clinic:"cafe",l_ta:"notes",l_mock:"insomnia",c_mate_col:"cafe",c_mate_rival:"storm",c_mate_ask:"cafe",__lotto0:"lotto0",__lotto1:"lotto1",r_annoy:"annoy",r_lostbook:"subway",r_blackout:"blackout",r_insomnia:"insomnia",r_sns:"phone",r_call:"call",r_tooth:"dentist",r_lawchange:"news",r_snow:"snow",r_notes:"notes",r_question:"question",r_eyes:"eyes",r_back:"back",r_leave:"leave",r_dog:"dog",r_help:"question",r_study:"cafe",r_lucky:"notes",r_slump:"insomnia",r_jealous:"jealous",r_rival:"jealous",r_matecouple:"couple",r_otherconf:"triangle",r_studydate:"cafe",r_anniv:"gift"};
@@ -1033,6 +1038,10 @@ function DF(){return DIFF[s.diff||"normal"]}
 // 이름은 받침 없는 것만 (본문 조사 "가/와/는"과 맞도록)
 const NAMES_F=["민지","지우","수아","서아","유나","예지","소희","지수","채아","윤서","서희","혜리","나래","수지","유리","은비","예나","지아","하나","가희","다희","세아","주아","시아"];
 const NAMES_M=["준호","지호","민수","현우","태호","승호","도하","시우","건우","민재","성호","지후","서후","정우","상우","재우","동하","태우","주호","영호","진우"];
+const REL_JOBS=["초등학교 교사","간호사","회사원","공무원","디자이너","약사","개발자","은행원"];
+function relCand(){if(!s.relCand){const pool=(s.gender==="f"?NAMES_M:NAMES_F).filter(n=>!(s.mates||[]).some(m=>m.n===n));s.relCand={n:pool[Math.floor(Math.random()*pool.length)],job:REL_JOBS[Math.floor(Math.random()*REL_JOBS.length)]}}return s.relCand}
+function partner(){return dating()&&lover()?{n:lover().n}:(s.rel&&["dating","married"].includes(s.rel.stage)?s.rel:null)}
+function partnerName(){const p=partner();return s.spouse||(p?p.n:"연인")}
 function pick2(a){const i=Math.floor(Math.random()*a.length);let j=Math.floor(Math.random()*(a.length-1));if(j>=i)j++;return[a[i],a[j]]}
 const MATES_F=()=>{const[x,y]=pick2(NAMES_F);return[{n:x,fem:1,hair:"#5a3e2b",shirt:"#2f9e8f",aff:35,st:"p1",tries:0},{n:y,fem:1,hair:"#8a5a3a",shirt:"#e08a2e",aff:30,st:"p1",tries:0}]};
 const MATES_M=()=>{const[x,y]=pick2(NAMES_M);return[{n:x,fem:0,hair:"#2b2b3a",shirt:"#2f9e8f",aff:35,st:"p1",tries:0},{n:y,fem:0,hair:"#4a3326",shirt:"#e08a2e",aff:30,st:"p1",tries:0}]};
@@ -1329,13 +1338,27 @@ const EV={
  c_scout:{t:()=>"헤드헌터의 연락",x:()=>"\"연봉 20% 더 드리는 자리가 있습니다.\" 헤드헌터에게서 연락이 왔다.",ok:()=>J()&&J().track!=="small"&&J().perf>=30,c:()=>[["이직한다","",()=>{J().payMul=(J().payMul||1)*1.12;s.mind-=3;return "새 직장에 적응하느라 정신없지만 월급이 올랐다."}],["남는다","",()=>{rp(2);s.mind+=2;return "팀장님이 \"남아 줘서 고맙다\"며 어깨를 두드렸다."}]]},
  c_invest:{t:()=>"코인 투자 권유",x:()=>"대학 동기가 \"이번 코인은 무조건 10배\"라며 1,000만 원 투자를 권한다.",c:()=>[["1,000만 원 넣는다","",()=>{if(s.money<10000000)return "통장을 보니 그럴 돈이 없었다. 다행인지도.";if(Math.random()<.25){s.money+=10000000;s.mind+=8;return "두 배가 됐다! …다음엔 안 할 거다."}s.money-=7000000;s.mind-=12;return "70%가 증발했다. 세무사가 이게 뭐람."}],["정중히 거절한다","",()=>{s.mind+=1;return "\"원금 보장 없는 건 안 해.\" 세무사다운 선택."}]]},
  c_health:{t:()=>"건강검진 결과",x:()=>"회사 건강검진에서 '스트레스 수치 높음, 운동 필요' 판정이 나왔다.",c:()=>[["PT를 등록한다","",()=>{s.hp+=15;s.mind+=5;return "주 2회 운동을 시작했다. 몸이 가벼워졌다."},1200000],["괜찮겠지, 넘긴다","",()=>{s.hp-=6;return "요즘 계단 오르기가 힘들다."}]]},
+ c_ethics:{t:()=>"수상한 부탁",x:()=>"오래된 고객이 조용히 말한다. \"현금 매출은 좀 빼고 신고해 주시면 안 될까요? 수고비는 따로 챙겨 드릴게요.\"",c:()=>[["단호하게 거절한다","세무사의 자존심",()=>{rp(5);s.mind+=3;const j=J();if(j&&Math.random()<.5)j.clients=Math.max(0,j.clients-1);return "\"그건 못 해 드립니다.\" 고객은 떠났을지 몰라도 이름은 지켰다."}],["눈감아 준다","₩2,000,000",()=>{s.money+=2000000;rp(-10);s.mind-=10;return "돈은 받았지만, 밤마다 세무조사 꿈을 꾼다."}]]},
+ c_inherit:{t:()=>"대형 상속세 사건",x:()=>"100억 원대 상속 건이 들어왔다. 상속증여 실무수습 때 배운 게 떠오른다.",c:()=>[["직접 맡는다","실적 ↑↑ · 체력 -10 · ₩3,000,000",()=>{const j=J();j.perf+=12;j.skill+=4;s.hp-=10;s.mind-=4;s.money+=3000000;rp(3);return "석 달을 매달린 끝에 신고를 마쳤다. 성공 보수 ₩3,000,000."}],["선배에게 넘긴다","",()=>{s.mind+=3;return "아직은 무리였다. 옆에서 어깨너머로 배웠다."}]]},
+ c_mentor:{t:()=>"수습 후배",x:()=>"올해 합격한 수습 세무사가 내 밑으로 왔다. 몇 년 전의 나처럼 잔뜩 긴장해 있다.",c:()=>[["하나하나 가르쳐 준다","",()=>{const j=J();j.perf+=3;rp(3);s.mind+=4;s.hp-=3;return "\"선배님 덕분에 살았어요.\" 가르치다 보니 나도 정리가 됐다."}],["알아서 하라고 한다","",()=>{s.mind+=1;return "다들 그렇게 배우는 거지, 뭐."}]]},
+ c_refund:{t:()=>"경정청구 성공",x:()=>"고객이 몇 년간 더 낸 세금을 찾아내 경정청구를 넣었는데, 2억 원 환급 결정이 났다!",c:()=>[["고객과 함께 기뻐한다","",()=>{const j=J();j.perf+=8;rp(6);s.mind+=8;s.money+=1000000;if(j)j.clients+=1;return "감사 인사와 함께 성공 보수 ₩1,000,000, 그리고 소개 고객까지."}]]},
+ c_unpaid:{t:()=>"밀린 기장료",x:()=>"석 달째 기장료를 안 낸 고객이 있다. 장사가 어렵다고 한다.",ok:()=>J()&&J().track!=="gov",c:()=>[["정중히 독촉한다","₩600,000",()=>{s.money+=600000;const j=J();if(Math.random()<.4)j.clients=Math.max(0,j.clients-1);return "돈은 받았지만 분위기가 서먹해졌다."}],["사정을 봐준다","",()=>{rp(2);s.mind+=2;return "\"꼭 갚을게요.\" 몇 달 뒤 단골을 두 명 소개해 줬다."}]]},
+ c_startup:{t:()=>"친구의 창업",x:()=>"고등학교 친구가 카페를 차린다며 사업자등록부터 물어본다.",c:()=>[["무료로 봐 준다","",()=>{s.mind+=5;const j=J();if(j)j.clients+=1;return "\"역시 세무사 친구가 최고야!\" 첫 단골 고객이 생겼다."}],["정식으로 수임한다","₩500,000",()=>{s.money+=500000;rp(1);return "친구 사이에도 계약서는 확실히."}]]},
+ c_seminar:{t:()=>"세무사회 연수",x:()=>"개정 세법 연수 공지가 떴다. 주말 이틀짜리다.",c:()=>[["참석한다","전문성 ↑↑",()=>{const j=J();j.skill+=8;s.hp-=4;return "올해 바뀐 법이 머리에 쏙 들어왔다."},200000],["다음에 듣는다","",()=>{s.hp+=3;return "주말엔 쉬어야지."}]]},
+ c_offer:{t:()=>"이직 제안",x:()=>"헤드헌터에게 연락이 왔다. \"지금보다 연봉 15% 더 드리겠습니다.\"",ok:()=>J()&&["big","local"].includes(J().track),c:()=>[["옮긴다","월급 15% ↑",()=>{const j=J();j.payMul=(j.payMul||1)*1.15;rp(-1);s.mind+=3;return "새 명함을 받았다. 월급이 올랐다."}],["의리로 남는다","",()=>{rp(3);s.mind+=2;J().perf+=3;return "대표님이 고맙다며 어깨를 두드려 줬다."}]]},
  c_lecture:{t:()=>"강의 제안",x:()=>"세무사 학원에서 '실무 특강'을 맡아 달라는 제안이 왔다.",ok:()=>s.rep>=55,c:()=>[["강의한다","",()=>{s.money+=2000000;rp(4);s.hp-=4;return "수험생들 눈빛을 보니 옛날 생각이 났다. 강의료 ₩2,000,000."}],["바빠서 거절한다","",()=>{return "다음에 기회가 있겠지."}]]},
  c_book:{t:()=>"실무서 집필 제안",x:()=>"출판사에서 '초보 사장님을 위한 세금 가이드' 집필을 제안했다.",ok:()=>J()&&J().skill>=30,c:()=>[["주말마다 쓴다","",()=>{s.money+=3000000;rp(6);s.mind-=4;s.hp-=5;return "책이 나왔다! 인세와 함께 고객 문의가 늘었다."}],["아직은 이르다","",()=>{return "조금 더 경험을 쌓고 쓰기로 했다."}]]},
  c_jeonse:{t:()=>"월세 인상 통보",x:()=>"집주인이 다음 달부터 월세를 20만 원 올리겠다고 한다.",ok:()=>!(s.assets||[]).some(x=>x.home),c:()=>[["그냥 올려 준다","",()=>{s.money-=1200000;s.mind-=3;return "6개월치 인상분을 생각하니 쓰리다."}],["이참에 내 집을 알아본다","쇼핑몰 부동산 코너를 확인해 보자",()=>{s.mind+=2;return "부동산 앱을 깔았다. 대출 이자부터 계산해 본다."}]]},
  c_dinner:{t:()=>"팀 회식",x:()=>"신고 시즌이 끝나고 팀 회식이 잡혔다. 2차, 3차까지 갈 분위기다.",c:()=>[["끝까지 함께한다","",()=>{rp(3);s.hp-=8;s.mind+=3;return "팀장님과 많이 친해졌다. 다음 날 머리가 깨질 것 같다."}],["1차만 하고 빠진다","",()=>{s.hp-=2;s.mind+=2;return "적당히가 최고다."}]]},
  c_junior:{t:()=>"수습 후배",x:()=>"올해 들어온 수습 세무사의 사수를 맡게 됐다. 몇 년 전의 나를 보는 것 같다.",ok:()=>J()&&J().rank>=1,c:()=>[["하나하나 가르친다","",()=>{rp(4);J().skill+=2;s.hp-=4;return "\"선배 덕분에 버텨요.\" 뿌듯하다."}],["알아서 하게 둔다","",()=>{J().perf+=3;return "내 일에 집중했다."}]]},
  c_fraud:{t:()=>"수상한 부탁",x:()=>"고객이 매출 일부를 빼고 신고해 달라며 봉투를 내민다.",c:()=>[["단호히 거절한다","",()=>{rp(5);s.mind+=3;J().clients=Math.max(0,J().clients-1);return "고객은 떠났지만, 세무사 자격증은 지켰다."}],["못 이기는 척 받는다","",()=>{s.money+=5000000;if(Math.random()<.6){rp(-30);s.mind-=25;s.money-=15000000;return "세무조사에서 들통났다. 징계와 손해배상… 모든 게 무너졌다."}s.mind-=15;return "밤마다 잠이 안 온다."}]]},
- c_wedding:{t:()=>"결혼 이야기",x:()=>`${lover()?lover().n:"연인"}와 결혼 이야기가 나왔다.`,ok:()=>dating()&&!s.flags.married,c:()=>[["결혼한다","",()=>{s.flags.married=1;s.mind+=25;rp(3);return "수험 시절 함께 버틴 사람과 부부가 됐다!"},30000000],["조금 더 모으고 하자","",()=>{s.love.upset=clamp((s.love.upset||0)+15);s.mind-=3;return "\"…알았어.\" 대답이 짧다."}]]},
+ c_blind:{t:()=>"소개팅 제안",x:()=>{const c=relCand();return `회사 선배가 소개팅을 주선해 줬다. 상대는 ${c.job} ${c.n}. \"세무사라고 하니까 궁금해하던데?\"`},ok:()=>!partner()&&!s.flags.married,c:()=>[["나가 본다","",()=>{const c=relCand();s.relCand=null;const A=(s.assets||[]);const p=Math.min(.9,.6+s.rep/400+(A.some(x=>x.car)?.05:0)+(A.some(x=>x.home)?.1:0)+(s.mind>=60?.05:0));
+   if(Math.random()<p){s.rel={stage:"dating",n:c.n,job:c.job,aff:55,since:J()?J().m:0};s.mind+=10;ach("blind");return `${c.n}와 대화가 끊이지 않았다. 세 번째 만남에서 사귀기로 했다!`}
+   s.mind-=4;return "좋은 사람이었지만 서로 바빠 연락이 뜸해졌다. 인연이 아니었나 보다."},100000],["지금은 일에 집중한다","",()=>{s.relCand=null;return "\"다음에 또 좋은 사람 있으면 말해 줘요.\""}]]},
+ c_pen:{t:()=>"뜻밖의 연락",x:()=>`수험 시절 소개팅에서 만났던 ${s.rel.n}에게서 메시지가 왔다. \"합격했다며? 약속대로 밥 한번 먹어요.\"`,ok:()=>s.rel&&s.rel.stage==="pen",c:()=>[["바로 약속을 잡는다","",()=>{s.rel.stage="dating";s.rel.aff=60;s.rel.since=J()?J().m:0;s.mind+=12;return `몇 년을 기다려 준 ${s.rel.n}. 그날 바로 사귀기로 했다.`}],["미안하다고 정중히 거절한다","",()=>{s.rel=null;s.mind-=2;return "고마운 마음만 전했다."}]]},
+ c_date:{t:()=>"주말 데이트",x:()=>`${s.rel.n}가 주말에 드라이브를 가자고 한다. 그런데 이번 주말은 신고 마감 직전이다.`,ok:()=>s.rel&&s.rel.stage==="dating",c:()=>[["일은 미루고 떠난다","",()=>{s.rel.aff=clamp(s.rel.aff+12);s.mind+=8;J().perf=Math.max(0,J().perf-4);return "바닷가에서 먹은 조개구이가 수험 시절 컵밥보다 백배 맛있었다."},300000],["미안, 일이 먼저야","",()=>{s.rel.aff=clamp(s.rel.aff-15);J().perf+=5;s.mind-=3;if(s.rel.aff<25){const n=s.rel.n;s.rel=null;s.mind-=10;return `${n}가 결국 이별을 말했다. \"넌 항상 일이 먼저잖아.\"`}return "\"…알았어. 일 열심히 해.\" 목소리가 서운하다."}]]},
+ c_wedding:{t:()=>"결혼 이야기",x:()=>`${partnerName()}와 결혼 이야기가 나왔다. 양가 부모님도 좋아하신다.`,ok:()=>!s.flags.married&&(dating()||(s.rel&&s.rel.stage==="dating"&&(!J()||J().m-(s.rel.since||0)>=1))),c:()=>[["번듯하게 결혼식을 올린다","",()=>{s.flags.married=1;s.spouse=partnerName();if(s.rel)s.rel.stage="married";s.mind+=25;rp(3);ach("married");return `${s.spouse}와 부부가 됐다! 신혼여행은 수험 시절 꿈꾸던 몰디브로.`},30000000],["가족끼리 스몰웨딩","",()=>{s.flags.married=1;s.spouse=partnerName();if(s.rel)s.rel.stage="married";s.mind+=20;ach("married");return `가까운 사람들만 모여 조용히 식을 올렸다. ${s.spouse}가 웃으며 손을 꼭 잡았다.`},8000000],["조금 더 모으고 하자","",()=>{if(s.rel)s.rel.aff=clamp(s.rel.aff-8);else s.love.upset=clamp((s.love.upset||0)+15);s.mind-=3;return "\"…알았어.\" 대답이 짧다."}]]},
+ c_baby:{t:()=>"기쁜 소식",x:()=>`${s.spouse||"배우자"}가 떨리는 목소리로 말한다. \"우리… 아기 생겼어.\"`,ok:()=>s.flags.married&&!s.flags.baby&&J()&&J().m>=2,c:()=>[["얼싸안고 기뻐한다","",()=>{s.flags.baby=1;s.mind+=25;rp(1);ach("baby");return "세무사 엄마·아빠가 된다. 이제 진짜 열심히 벌어야지! (육아비가 해마다 들어요)"}]]},
  c_parents:{t:()=>"부모님 생신",x:()=>"부모님 생신이다. 수험 시절 내내 뒷바라지해 주신 분들이다.",c:()=>[["용돈 200만 원을 드린다","",()=>{s.mind+=10;return "\"우리 아들딸 세무사 됐다\"며 동네방네 자랑하셨다."},2000000],["식사 대접만 한다","",()=>{s.mind+=5;return "온 가족이 모여 웃었다."},300000],["전화로 마음만 전한다","",()=>{s.mind+=1;return "\"돈 걱정 말고 건강만 해라.\" 목이 멘다."}]]},
  c_burn:{t:()=>"번아웃 신호",x:()=>"아침에 눈을 뜨기가 싫다. 일요일 저녁만 되면 가슴이 답답하다.",ok:()=>s.mind<45,c:()=>[["일주일 휴가를 낸다","",()=>{s.mind+=20;s.hp+=10;J().perf=Math.max(0,J().perf-4);return "아무것도 안 하고 쉬었다. 조금 살 것 같다."}],["상담을 받아 본다","",()=>{s.mind+=14;return "\"잘하고 있어요.\" 그 한마디에 울컥했다."},400000],["버틴다","",()=>{s.mind-=8;s.hp-=6;return "몸이 먼저 신호를 보낸다."}]]},
  c_mate_col:{t:()=>"반가운 얼굴",x:()=>{const m=(s.mates||[]).find(q=>q.st==="pass");return `회사 엘리베이터에서 ${m.n}를 마주쳤다. "나 여기 입사했어! 이제 동료네?"`},ok:()=>J()&&J().track==="big"&&(s.mates||[]).some(q=>q.st==="pass")&&!s.flags.mateCol,
@@ -1380,6 +1403,7 @@ const EV={
  r_cheer4:{t:()=>"강사의 개인 피드백",x:()=>"답안을 본 강사가 따로 불렀다. \"실력은 이미 합격권이에요. 이 습관 하나만 고치면 됩니다.\"",c:()=>[["조언대로 고친다","전 과목 실력 상승",()=>{addAll(B()*1.1);s.mind+=6;return "고칠 점이 딱 하나라니. 끝이 보이기 시작했다."}]]},
  r_cheer5:{t:()=>"N수 합격 수기",x:()=>"\"5수 끝에 합격했습니다\"라는 수기를 읽었다. 나보다 더 오래 버틴 사람도 결국 붙었다.",c:()=>[["나도 할 수 있다","",()=>{s.mind+=9;add(weakest(),B()*.8);return "포기하지 않으면 붙는다. 오늘 공부가 유난히 잘된다."}]]},
  r_cheer6:{t:()=>"이번엔 감이 온다",x:()=>"모의고사 채점을 해 보니 처음으로 전 과목이 과락을 넘었다. 몸이 기억하기 시작했다.",c:()=>[["이 감각을 유지한다","",()=>{addAll(B()*.9);s.mind+=7;rp(1);return "몇 년간 쌓인 게 헛되지 않았다."}]]},
+ r_blind:{t:()=>"소개팅 제안",x:()=>{const c=relCand();return `친구가 소개팅을 주선했다. "${c.job}인데 진짜 괜찮아. 공부만 하지 말고 한 번만 나가 봐."`},ok:()=>!dating()&&!["some","dating"].includes(s.love.stage)&&!s.rel&&s.abs>=6&&Math.random()<.25,c:()=>[["한 번 나가 본다","",()=>{const c=relCand();s.relCand=null;if(Math.random()<.1){s.rel={stage:"pen",n:c.n,job:c.job,aff:50};s.mind+=8;return `${c.n}와 이야기가 잘 통했다. "시험 끝나면 꼭 다시 봐요." 응원 메시지가 힘이 된다.`}s.mind-=3;return "어색한 두 시간이었다. 역시 지금은 공부할 때인가 보다."},50000],["시험 끝날 때까지는 안 돼","",()=>{s.relCand=null;s.mind+=1;return "\"합격하면 그때 꼭 소개해 줘.\""}]]},
  r_lucky:{t:()=>"적중 예감?",x:()=>"스터디원이 '올해 무조건 나온다'는 주제를 알려 줬다. 믿어 볼까?",
   c:()=>[["그 주제를 파 본다","",()=>{const k=subs()[Math.floor(Math.random()*4)];if(Math.random()<.5){add(k,6*EVK());s.mind+=3;return `적중 예감! ${k} 실력 상승.`}s.mind-=3;s.hp-=2;return "알고 보니 작년에 나온 주제였다…"}],["하던 대로 한다","",()=>{s.mind+=3;rp(1);return "흔들리지 않기로 했다."}]]},
  r_scholar:{t:()=>"성적 장학금",x:()=>"학원 모의고사 성적 우수자로 뽑혔다!",ok:()=>reg()&&reg().m==="live"&&s.lastBB&&(s.lastBB<=40||(s.rep>=60&&s.lastBB<=80)),
@@ -1461,7 +1485,7 @@ const EV={
   c:()=>[["부모님께 SOS","",()=>{s.flags.brokeAt=s.phase+s.t;if(s.flags["sos_"+s.phase]){s.mind-=4;return "또 손을 벌리기엔 염치가 없다. 그냥 버틴다."}s.flags["sos_"+s.phase]=1;s.money+=600000;s.mind-=8;return "부모님이 60만 원을 보내 주셨다. 꼭 붙어야겠다."}],
      ["저녁 알바를 늘린다","",()=>{s.flags.brokeAt=s.phase+s.t;s.money+=350000;s.hp-=12;bkAdd(5);return "편의점 야간 알바를 시작했다. +₩350,000"}]]}
 };
-const RAND=["r_annoy","r_lostbook","r_blackout","r_insomnia","r_sns","r_call","r_tooth","r_lawchange","r_snow","r_notes","r_question","r_eyes","r_back","r_leave","r_dog","r_mate1","r_mate3","r_help","r_senior","r_allow","r_spend","r_bday","r_friend","r_reunion","r_wedding","r_cold","r_slump","r_noise","r_laptop","r_gig","r_mom","r_lucky","r_scholar","r_rumor","r_newed","r_omr","r_wrist","r_calc","r_9gup","r_job","r_cafeq","r_lunch","r_seat","r_hair","r_suki","r_rain","r_proof","r_vatjob","r_caffeine"];
+const RAND=["r_annoy","r_lostbook","r_blackout","r_insomnia","r_sns","r_call","r_tooth","r_lawchange","r_snow","r_notes","r_question","r_eyes","r_back","r_leave","r_dog","r_mate1","r_mate3","r_help","r_senior","r_allow","r_spend","r_bday","r_friend","r_reunion","r_wedding","r_cold","r_slump","r_noise","r_laptop","r_gig","r_mom","r_lucky","r_scholar","r_blind","r_rumor","r_newed","r_omr","r_wrist","r_calc","r_9gup","r_job","r_cafeq","r_lunch","r_seat","r_hair","r_suki","r_rain","r_proof","r_vatjob","r_caffeine"];
 function startTurn(){
  const c=cal(s.t);const g=curSeg();
  let id=null;
@@ -1561,6 +1585,7 @@ function doWeek(){
  if(groupDays)activeMates().forEach(m=>m.aff=clamp(m.aff+groupDays*2));
  if(groupDays&&dating())s.love.upset=Math.max(0,s.love.upset-groupDays*2);
  s.ink=Math.max(0,s.ink-Math.ceil(studyDays/2));if(studyDays>0)s.paper=Math.max(0,s.paper-Math.ceil(studyDays/3));
+ if(s.rel&&s.rel.stage==="pen")s.mind+=1;
  if(dating()){s.mind+=2;const dd=s.plan.filter(x=>x==="date").length;if(!dd)s.love.upset=clamp(s.love.upset+7);if(groupDays){s.mind+=1}}
  if(s.lottoQ){const n=s.lottoQ;s.lottoQ=0;log(`[로또 토요일 추첨] ${lottoDraw(n)}`)}
  const exDays=s.plan.filter(x=>["walk","home","gymx","yoga"].includes(x)).length,restDays=s.plan.filter(x=>x==="rest").length;
@@ -1863,6 +1888,7 @@ function evArt2(k){
 }
 
 function endArt(k){
+ k=({E_lawfirm:"E_partner",E_clerk:"E_lawschool",E_dual:"E_local"})[k]||k;
  let g="";const L=lover();
  const desk=(x,y,w=40)=>rc(x,y,w,5,OL)+rc(x+1,y,w-2,3,"#8a5a3a")+rc(x+2,y+5,3,10,OL)+rc(x+w-5,y+5,3,10,OL);
  const monitor=(x,y)=>rc(x,y,16,11,OL)+rc(x+1,y+1,14,8,"#7ea6ec")+rc(x+6,y+11,4,3,OL);
@@ -1935,39 +1961,46 @@ const TRACK={
  big:{n:"대형 세무법인",ranks:["수습","주니어","시니어","매니저","파트너 후보"],need:[0,40,100,180,280],pay:[3800000,4500000,5600000,7200000,9500000],art:"E_partner"},
  local:{n:"로컬 세무사무소",ranks:["수습","실무자","팀장","실장"],need:[0,40,110,200],pay:[3600000,4500000,5600000,6800000],art:"E_local"},
  gov:{n:"세무서 (7급 세무직)",ranks:["7급 주무관","6급 조사관"],need:[0,140],pay:[3000000,3700000],art:"E_gov"},
- small:{n:"내 세무사무소",ranks:["대표"],need:[0],pay:[0],art:"E_balance"}};
+ small:{n:"내 세무사무소",ranks:["대표"],need:[0],pay:[0],art:"E_balance"},
+ inhouse:{n:"기업 세무팀",ranks:["사원","대리","과장","팀장"],need:[0,60,150,260],pay:[3700000,4600000,5800000,7500000],art:"E_inhouse"}};
+const TRACK_NEXT={big:"a_big",local:"a_local",small:"a_open",inhouse:"E_inhouse",gov:"E_gov"};
 const CACT=[
- {id:"night",n:"야근하며 실적 쌓기",d:"실적 ↑↑ · 평판 +2 · 체력 -12 · 멘탈 -8",f(){J().perf+=11;rp(2);s.hp-=12;s.mind-=8;return "밤 11시 퇴근이 일상이 됐다."}},
- {id:"normal",n:"정시 퇴근",d:"실적 ↑ · 체력 +8 · 멘탈 +8",f(){J().perf+=4;s.hp+=8;s.mind+=8;return "칼퇴하고 저녁이 있는 삶."}},
- {id:"study",n:"세법 개정·실무 공부",d:"전문성 ↑↑ · 실적 ↑ · 멘탈 -2",f(){J().skill+=7;J().perf+=3;s.mind-=2;return "개정 세법과 예규를 정리했다."}},
- {id:"sales",n:"영업·네트워킹",d:"고객 +2~4 · 평판 +2 · ₩300,000",fee:300000,f(){const n=2+Math.floor(Math.random()*3);J().clients+=n;rp(2);s.hp-=3;return `세미나와 모임에서 명함을 돌렸다. 고객 +${n}.`}},
- {id:"vac",n:"휴가 다녀오기",d:"체력 +25 · 멘탈 +25 · 실적 -3 · ₩1,500,000",fee:1500000,f(){J().perf=Math.max(0,J().perf-3);s.hp+=25;s.mind+=25;return "제주도에서 일주일 푹 쉬었다."}}];
+ {id:"night",n:"야근하며 실적 쌓기",d:"실적 ↑↑ · 평판 ↑ · 체력·멘탈 ↓↓",f(){J().perf+=11;rp(2);s.hp-=12;s.mind-=8;return "밤 11시 퇴근이 일상이 됐다."}},
+ {id:"normal",n:"정시 퇴근",d:"실적 ↑ · 체력·멘탈 회복",f(){J().perf+=4;s.hp+=8;s.mind+=8;return "칼퇴하고 저녁이 있는 삶."}},
+ {id:"study",n:"세법 개정·실무 공부",d:"전문성 ↑↑ · 실적 ↑ · 멘탈 조금 ↓",f(){J().skill+=7;J().perf+=3;s.mind-=2;return "개정 세법과 예규를 정리했다."}},
+ {id:"sales",n:"영업·네트워킹",d:"고객 ↑ · 평판 ↑ · ₩1,200,000",fee:1200000,f(){const n=2+Math.floor(Math.random()*3);J().clients+=n;rp(2);s.hp-=3;return `세미나와 모임에서 명함을 돌렸다. 고객 +${n}.`}},
+ {id:"teach",n:"수험생 특강 출강",d:"₩4,800,000 · 평판 ↑ · 체력 ↓",f(){s.money+=4000000;rp(3);s.hp-=6;J().skill+=2;return "후배 수험생들 앞에서 강의했다. 나도 저 자리에 앉아 있었는데."}},
+ {id:"blog",n:"절세 블로그·유튜브",d:"고객 ↑ · 평판 ↑ · 멘탈 조금 ↓",f(){const r=Math.random(),n=r<.35?0:r<.8?1:2;J().clients+=n;rp(1);s.mind-=2;return n?`글을 보고 상담 문의가 왔다. 고객 +${n}.`:"조회수는 아직 미미하다. 꾸준히 해 보자."}},
+ {id:"vac",n:"휴가 넉넉히 쓰기",d:"체력·멘탈 크게 회복 · 실적 조금 ↓ · ₩3,000,000",fee:3000000,f(){J().perf=Math.max(0,J().perf-3);s.hp+=25;s.mind+=25;return "제주도에서 일주일 푹 쉬었다."}}];
 const MALL=[
  {c:"자동차",id:"car_s",n:"경차",p:15000000,up:150000,mind:5,rep:0,d:"출퇴근용 첫 차"},
  {c:"자동차",id:"car_m",n:"중형 세단",p:35000000,up:300000,mind:8,rep:2,d:"고객 미팅에 무난한 차"},
  {c:"자동차",id:"car_l",n:"수입 세단",p:75000000,up:600000,mind:12,rep:4,d:"\"세무사님 차 좋네요\""},
+ {c:"자동차",id:"car_p",n:"스포츠카",p:150000000,up:1000000,mind:15,rep:1,d:"주말 드라이브용 로망"},
  {c:"자동차",id:"car_x",n:"슈퍼카",p:300000000,up:2000000,mind:20,rep:-3,d:"고객들이 수임료를 의심하기 시작한다"},
+ {c:"부동산",id:"home_v",n:"신축 빌라",p:150000000,up:100000,mind:6,rep:0,home:1,d:"첫 내 집. 대출 가능(70%)"},
  {c:"부동산",id:"home_o",n:"역세권 오피스텔",p:230000000,up:150000,mind:10,rep:1,home:1,d:"월세 탈출! 대출 가능(70%)"},
  {c:"부동산",id:"home_a",n:"수도권 아파트",p:700000000,up:300000,mind:15,rep:2,home:1,d:"내 집 마련의 꿈. 대출 가능(70%)"},
  {c:"부동산",id:"home_g",n:"서울 아파트",p:1500000000,up:500000,mind:20,rep:3,home:1,d:"오르면 대박, 내리면… 대출 가능(70%)"},
- {c:"부동산",id:"home_b",n:"꼬마빌딩",p:4000000000,up:3000000,mind:20,rep:5,inc:12000000,home:1,d:"매달 임대 수익 ₩12,000,000. 대출 가능(70%)"},
+ {c:"부동산",id:"home_k",n:"강남 아파트",p:3000000000,up:800000,mind:25,rep:4,home:1,d:"대한민국 부동산의 정점. 대출 가능(70%)"},
+ {c:"부동산",id:"home_b",n:"꼬마빌딩",p:4000000000,up:3000000,mind:20,rep:5,inc:12000000,home:1,d:"임대 수익 월 ₩12,000,000. 대출 가능(70%)"},
  {c:"명품",id:"lux_w",n:"명품 시계",p:15000000,mind:10,rep:2,d:"손목 위의 합격 기념"},
  {c:"명품",id:"lux_b",n:"명품 가방",p:6000000,mind:8,rep:1,d:"수험 시절 나에게 주는 선물"},
  {c:"명품",id:"lux_s",n:"맞춤 정장",p:3000000,mind:4,rep:3,d:"첫인상이 달라진다"},
  {c:"경험·생활",id:"exp_trip",n:"유럽 여행 (10일)",p:8000000,mind:30,hp:30,once:0,d:"신고 시즌 끝나고 떠나는 여행"},
- {c:"경험·생활",id:"exp_chair",n:"안마의자",p:4000000,mind:5,hpm:3,d:"매달 체력 +3"},
+ {c:"경험·생활",id:"exp_chair",n:"안마의자",p:4000000,mind:5,hpm:3,d:"매년 체력 회복"},
  {c:"경험·생활",id:"exp_parents",n:"부모님 효도 여행",p:5000000,mind:15,rep:1,once:0,d:"뒷바라지해 주신 부모님께"},
  {c:"경험·생활",id:"exp_donate",n:"후배 수험생 장학금 기부",p:10000000,mind:8,rep:8,once:0,d:"선배의 노트처럼, 나도 누군가에게"}];
 const J=()=>s.job;
 function netWorth(){return Math.round(s.money+(s.assets||[]).reduce((a,x)=>a+(x.value||0)-(x.loan||0),0))}
 function loans(){return (s.assets||[]).reduce((a,x)=>a+(x.loan||0),0)}
-function cdate(){const j=J();const t=j.m;return {y:j.y0+Math.floor((j.mo0-1+t)/12),m:(j.mo0-1+t)%12+1}}
+function cdate(){const j=J();return {y:j.y0+j.m,m:1}}
 function startCareer(to){
  const tr=to==="E_balance"?"small":to==="a_local"?"local":"big";
- s.job={on:1,track:tr,next:to,m:0,months:24,y0:s.ey+1,mo0:1,perf:to==="a_grind"?100:0,skill:10,clients:tr==="small"?12:0,rank:to==="a_grind"?2:0};
+ s.job={on:1,track:tr,next:to,m:0,months:30,y0:s.ey+1,mo0:1,perf:to==="a_grind"?100:0,skill:10,clients:tr==="small"?12:0,rank:to==="a_grind"?2:0};
  s.assets=s.assets||[];s.mode="career";s.money=Math.max(s.money,0);
  log(`[실무 시작] ${TRACK[tr].n}${to==="a_grind"?" (스카우트, 시니어로 입사)":""}에서 세무사 생활을 시작했다.`);
- popup("세무사 생활 시작!",`${TRACK[tr].n}에서 첫 출근. 앞으로 2년, 매달 일하는 방식을 고르고 월급으로 차와 집도 마련해 보자.`,null,[]);
+ popup("세무사 생활 시작!",`${TRACK[tr].n}에서 첫 출근. 이제 1년 단위로 일하는 방식을 고르고, 차와 집도 마련해 보자. 이직도, 엔딩도 원할 때 할 수 있다.`,null,[]);
  save();render();
 }
 function rankUp(){const j=J(),T=TRACK[j.track];let r=0;T.need.forEach((n,i)=>{if(j.perf>=n)r=i});if(r>j.rank){j.rank=r;popup("승진!",`${T.ranks[r]}(으)로 승진했다. 월급이 ${W(monthPay())}(으)로 올랐다.`,null,[]);log(`[승진] ${T.ranks[r]}`);rp(3);s.mind+=6}}
@@ -1975,50 +2008,63 @@ function monthPay(){const j=J();if(j.track==="small")return j.clients*550000-200
 function careerMonth(id){
  const a=CACT.find(x=>x.id===id);if(!a)return;const j=J();if(a.fee&&s.money<a.fee)return;j.last=id;
  const st0={hp:s.hp,mind:s.mind,rep:s.rep,money:s.money};const dt=cdate();const why=[];
- if(a.fee)s.money-=a.fee;why.push(a.f());
- // 신고 시즌
- const SEA={1:["부가세 확멘탈고",4,3,2],2:["연말정산 시즌",4,2,2],3:["법인세 신고 시즌",12,7,9],5:["종합소득세 신고 시즌",10,6,7],7:["부가세 확멘탈고",4,3,2]}[dt.m];
- if(SEA){s.hp-=SEA[1];s.mind-=SEA[2];j.perf+=SEA[3];why.push(`${SEA[0]}: 체력 -${SEA[1]}, 멘탈 -${SEA[2]}, 실적 +${SEA[3]}`)}
- if(dt.m===12&&j.track!=="small"){const b=Math.round(j.perf*40000/10000)*10000+500000;s.money+=b;why.push(`연말 성과급 +${W(b)}`)}
- if(j.track==="small")j.clients=Math.max(0,j.clients+(Math.random()<.5?1:0)+(j.skill>40&&Math.random()<.4?1:0));
- // 수입·지출
- const pay=monthPay();s.money+=pay;why.push(`${j.track==="small"?"사무소 순수입":"월급"} ${pay>=0?"+":""}${W(pay)}`);
- const home=(s.assets||[]).some(x=>x.home);const live=1800000+(home?0:700000);s.money-=live;why.push(`생활비${home?"":"·월세"} -${W(live)}`);
- let up=0,inc=0,intr=0;(s.assets||[]).forEach(x=>{up+=x.up||0;inc+=x.inc||0;intr+=Math.round((x.loan||0)*0.045/12);
-  if(x.home)x.value=Math.round(x.value*(1+(Math.random()*2.4-0.9)/100));else if(x.car)x.value=Math.round(x.value*0.99);else if(x.lux)x.value=Math.round(x.value*0.995);
-  if(x.hpm)s.hp+=x.hpm});
+ if(a.fee)s.money-=a.fee;
+ // 1년치 행동: 한 번 실행한 뒤 성과는 키우고 체력·멘탈 변화는 1.5배
+ const b0={perf:j.perf,skill:j.skill,clients:j.clients,hp:s.hp,mind:s.mind};why.push(a.f());
+ j.perf=b0.perf+(j.perf-b0.perf)*6;j.skill=b0.skill+(j.skill-b0.skill)*4;j.clients=b0.clients+(j.clients-b0.clients)*2;
+ s.hp=b0.hp+(s.hp-b0.hp)*1.5;s.mind=b0.mind+(s.mind-b0.mind)*1.5;
+ // 한 해의 신고 시즌
+ if(j.track==="gov"){s.hp-=8;s.mind-=6;j.perf+=10;why.push("세무조사·신고 시즌: 체력 -8, 멘탈 -6, 실적 +10")}
+ else{s.hp-=18;s.mind-=12;j.perf+=20;why.push("신고 시즌(법인세·종소세·부가세): 체력 -18, 멘탈 -12, 실적 +20")}
+ if(j.track!=="small"){const b=Math.round((j.perf*30000+2000000)/10000)*10000;s.money+=b;why.push(`연말 성과급 +${W(b)}`)}
+ if(j.track==="small"){const g=Math.floor(Math.random()*3)+(j.skill>40?1:0)+(j.skill>80?1:0);j.clients+=g;if(g)why.push(`소개로 고객 +${g}`)}
+ // 수입·지출 (1년)
+ const pay=monthPay()*12;s.money+=pay;why.push(`${j.track==="small"?"사무소 순수입":"연봉"} ${pay>=0?"+":""}${W(pay)}`);
+ const home=(s.assets||[]).some(x=>x.home);const live=(1800000+(home?0:700000))*12;s.money-=live;why.push(`생활비${home?"":"·월세"} -${W(live)}`);
+ let up=0,inc=0,intr=0;(s.assets||[]).forEach(x=>{up+=(x.up||0)*12;inc+=(x.inc||0)*12;intr+=Math.round((x.loan||0)*0.045);
+  if(x.home)x.value=Math.round(x.value*(1+(Math.random()*16-6)/100));else if(x.car)x.value=Math.round(x.value*0.88);else if(x.lux)x.value=Math.round(x.value*0.95);
+  if(x.hpm)s.hp+=x.hpm*4});
+ if(s.flags.married){const fc=6000000+(s.flags.baby?12000000:0);s.money-=fc;s.mind+=s.flags.baby?5:3;why.push(`${s.flags.baby?"가족(육아 포함)":"신혼"} 생활비 -${W(fc)}, 멘탈 +${s.flags.baby?5:3}`)}
  if(up){s.money-=up;why.push(`유지비 -${W(up)}`)}if(intr){s.money-=intr;why.push(`대출 이자 -${W(intr)}`)}if(inc){s.money+=inc;why.push(`임대 수익 +${W(inc)}`)}
- if(s.money<0){s.mind-=5;why.push("잔고 마이너스: 멘탈 -5")}
+ if(s.money<0){s.mind-=8;why.push("잔고 마이너스: 멘탈 -8")}
  fix();rankUp();j.m++;
  const ch=[["체력",Math.round(s.hp-st0.hp)],["멘탈",Math.round(s.mind-st0.mind)],["평판",Math.round(s.rep-st0.rep)],["돈",Math.round(s.money-st0.money)]].filter(x=>x[1]);
- popup(`${dt.y}년 ${dt.m}월 결과`,why.join("\n"),null,ch,{dur:3500,latest:1});
- log(`[${dt.y}.${dt.m}] ${a.n}. 순자산 ${W(netWorth())}`);
+ popup(`${dt.y}년 결산`,why.join("\n"),null,ch,{dur:3500,latest:1});
+ log(`[${dt.y}년] ${a.n}. 순자산 ${W(netWorth())}`);
  if(netWorth()>=1000000000)ach("rich");
- if(j.m>=j.months){endCareer();return}
- // 이벤트
+ if(j.m>=j.months){popup("은퇴","30년의 세무사 생활을 마무리할 때가 됐다.",null,[]);endCareer();return}
+ // 이벤트 (해마다)
+ if(EV.c_blind.ok()&&!(s.cool.c_blind>j.m)&&Math.random()<.5){s.cool.c_blind=j.m+1;s.ev="c_blind";s.mode="event";save();render();return}
  const pool=CEV.filter(k=>EV[k]&&(!EV[k].ok||EV[k].ok())&&!(s.cool[k]>j.m));
- if(pool.length&&Math.random()<.5){const k=pool[Math.floor(Math.random()*pool.length)];s.cool[k]=j.m+8;s.ev=k;s.mode="event"}
+ if(pool.length&&Math.random()<.8){const k=pool[Math.floor(Math.random()*pool.length)];s.cool[k]=j.m+3;s.ev=k;s.mode="event"}
  save();render();
 }
+function changeJob(tr){const j=J();if(!j||!TRACK[tr]||tr===j.track)return;const T=TRACK[tr];
+ if(tr==="big"&&s.rep<50)return;if(tr==="small"){if(s.money<30000000)return;s.money-=30000000}
+ const old=TRACK[j.track].n;j.track=tr;j.next=TRACK_NEXT[tr];j.payMul=1;
+ if(tr==="small"){j.clients=Math.max(j.clients,8+Math.floor(j.skill/10));j.rank=0}else{j.rank=0;rankUp()}
+ j.picking=0;s.mind+=5;log(`[이직] ${old} → ${T.n}`);popup("이직!",`${old}을(를) 떠나 ${T.n}(으)로 옮겼다.${tr==="small"?" 개업 비용 ₩30,000,000.":""}`,null,[]);save();render()}
 function endCareer(){const j=J();j.on=0;s.careerDone=1;const to=j.next;
- popup("실무 2년 차 결산",`${TRACK[j.track].n} ${TRACK[j.track].ranks[j.rank]} · 순자산 ${W(netWorth())}${(s.assets||[]).length?` · 보유 자산 ${s.assets.length}개`:""}`,null,[]);
- log(`[결산] 실무 2년. 순자산 ${W(netWorth())}.`);
+ popup(`실무 ${j.m}년 차 결산`,`${TRACK[j.track].n} ${TRACK[j.track].ranks[j.rank]} · 순자산 ${W(netWorth())}${(s.assets||[]).length?` · 보유 자산 ${s.assets.length}개`:""}`,null,[]);
+ log(`[결산] 실무 ${j.m}년. 순자산 ${W(netWorth())}.`);
  const A=(s.assets||[]).map(x=>x.id);if(netWorth()<0){finish("E_debt");return}if(A.includes("home_b")){finish("E_landlord");return}if(A.includes("car_x")){finish("E_sns");return}
  Object.assign(NODES,NODES_LOVE);if(ENDS[to]){finish(to);return}if(NODES[to]&&NODES[to].enter)NODES[to].enter();s.node=to;s.mode="story";save();render()}
 function careerCard(c){
  const j=J(),T=TRACK[j.track],dt=cdate();const pay=monthPay();
- const SEAN={1:"부가세 확멘탈고",2:"연말정산",3:"법인세 신고 시즌",5:"종합소득세 신고 시즌",7:"부가세 확멘탈고",12:"연말 성과급"}[dt.m];
- c.innerHTML=`<h2>${dt.y}년 ${dt.m}월 <span class="dday">실무 ${j.m+1} / ${j.months}개월</span></h2>
+ if(j.picking){const opts=Object.keys(TRACK).filter(k=>k!==j.track&&k!=="gov").map(k=>{const t=TRACK[k];const lock=k==="big"&&s.rep<50?"평판 50 필요":k==="small"&&s.money<30000000?"개업 비용 ₩30,000,000 필요":"";
+   const d={big:"연봉 높고 승진 빠름, 신고 시즌은 지옥",local:"사장님들과 가까운 현장",small:"내 사무소 개업. 고객 수만큼 번다 (개업 비용 ₩30,000,000)",inhouse:"한 회사의 세금만 깊게. 안정적인 연봉"}[k];
+   return `<button data-cjob="${k}" ${lock?"disabled":""}>${esc(t.n)}<small>${esc(lock||d)}</small></button>`}).join("");
+  c.innerHTML=`<h2>이직하기</h2><p class="sub">지금: ${esc(T.n)} · ${esc(T.ranks[j.rank])}. 옮기면 직급은 처음부터지만 쌓은 실적은 그대로예요.</p><div class="opts">${opts}</div><div class="opts"><button data-cjob="cancel">그냥 남는다</button></div>`;return}
+ c.innerHTML=`<h2>${dt.y}년 <span class="dday">실무 ${j.m+1}년 차</span></h2>
  <p class="note" style="margin:0 0 6px">${esc(T.n)} · <b>${esc(T.ranks[j.rank])}</b>${j.track!=="small"&&j.rank<T.ranks.length-1?` · 다음 승진까지 실적 ${Math.max(0,T.need[j.rank+1]-j.perf)}`:""}</p>
- <div class="quick"><span>${j.track==="small"?"월 순수입":"월급"} <b>${W(pay)}</b></span><span>실적 <b>${j.perf}</b></span><span>전문성 <b>${j.skill}</b></span>${j.track==="small"||j.clients?`<span>고객 <b>${j.clients}</b></span>`:""}<span>순자산 <b>${W(netWorth())}</b></span>${loans()?`<span class="warn">대출 <b>${W(loans())}</b></span>`:""}</div>
- ${SEAN?`<div class="alert">${dt.m===12?"이번 달은 연말 성과급이 나온다!":`이번 달은 ${SEAN}! 야근이 늘고 체력·멘탈이 더 든다.`}</div>`:""}
- <p class="sub" style="font-weight:600;color:var(--ink);margin:10px 0 6px">이번 달은 어떻게 일할까?</p>
- <div class="opts">${CACT.filter(a=>!(j.track==="gov"&&a.id==="sales")).map(a=>`<button data-cact="${a.id}" ${a.fee&&s.money<a.fee?"disabled":""}>${esc(a.n)}<small>${esc(a.d)}</small></button>`).join("")}</div>
- <div class="opts"><button class="go" data-mall="1">🛒 쇼핑몰 (자동차 · 부동산 · 명품)<small>월급을 모아 차와 집을 마련하자</small></button></div>`;
+ <div class="quick"><span>${j.track==="small"?"연 순수입":"연봉"} <b>${W(pay*12)}</b></span><span>실적 <b>${j.perf}</b></span><span>전문성 <b>${j.skill}</b></span>${j.track==="small"||j.clients?`<span>고객 <b>${j.clients}</b></span>`:""}<span>순자산 <b>${W(netWorth())}</b></span>${loans()?`<span class="warn">대출 <b>${W(loans())}</b></span>`:""}</div>
+ <p class="sub" style="font-weight:600;color:var(--ink);margin:10px 0 6px">올해는 어떻게 일할까? (1년이 흘러요)</p>
+ <div class="opts">${CACT.filter(a=>!(j.track==="gov"&&["sales","teach","blog"].includes(a.id))).map(a=>`<button data-cact="${a.id}" ${a.fee&&s.money<a.fee?"disabled":""}>${esc(a.n)}<small>${esc(a.d)}</small></button>`).join("")}</div>
+ <div class="opts"><button class="go" data-mall="1">🛒 쇼핑몰 (자동차 · 부동산 · 명품)<small>연봉을 모아 차와 집을 마련하자</small></button>${j.track!=="gov"?`<button data-cjob="open">💼 이직하기<small>다른 곳으로 옮기거나 개업한다</small></button>`:""}<button data-cend="1" ${j.m<1?"disabled":""}>🏁 여기서 엔딩 보기<small>${j.m<1?"1년은 일해 보고 결정하자":"지금까지의 세무사 인생으로 엔딩을 본다"}</small></button></div>`;
 }
-function mallIcon(it){const c={car_s:"#f2c94c",car_m:"#7a8aa0",car_l:"#2b2b3a",car_x:"#d6453d"}[it.id];
+function mallIcon(it){const c={car_s:"#f2c94c",car_m:"#7a8aa0",car_l:"#2b2b3a",car_p:"#2f7fd0",car_x:"#d6453d"}[it.id];
  if(it.c==="자동차")return rc(4,10,32,10,OL)+rc(5,11,30,8,c)+rc(10,5,18,7,OL)+rc(11,6,16,6,c)+rc(13,7,5,4,"#bfe3ff")+rc(20,7,5,4,"#bfe3ff")+rc(7,18,8,8,OL)+rc(9,20,4,4,"#9aa3b5")+rc(25,18,8,8,OL)+rc(27,20,4,4,"#9aa3b5");
- if(it.c==="부동산"){const h={home_o:18,home_a:22,home_g:26,home_b:20}[it.id],w=it.id==="home_b"?26:16;let g=rc(20-w/2,28-h,w,h,OL)+rc(21-w/2,29-h,w-2,h-1,it.id==="home_b"?"#c9a47a":"#e8dcc0");for(let y=31-h;y<26;y+=4)for(let x=23-w/2;x<18+w/2;x+=4)g+=rc(x,y,2,2,"#7ea6ec");return g}
+ if(it.c==="부동산"){const h={home_v:14,home_o:18,home_a:22,home_g:26,home_k:28,home_b:20}[it.id],w=it.id==="home_b"?26:16;let g=rc(20-w/2,28-h,w,h,OL)+rc(21-w/2,29-h,w-2,h-1,it.id==="home_b"?"#c9a47a":"#e8dcc0");for(let y=31-h;y<26;y+=4)for(let x=23-w/2;x<18+w/2;x+=4)g+=rc(x,y,2,2,"#7ea6ec");return g}
  if(it.id==="lux_w")return `<circle cx="20" cy="15" r="9" fill="#f2c94c" stroke="${OL}" stroke-width="1.5"/><circle cx="20" cy="15" r="6" fill="#fff"/>`+rc(19.5,10,1,5,OL)+rc(20,14.5,4,1,OL)+rc(17,3,6,4,OL)+rc(17,23,6,4,OL);
  if(it.id==="lux_b")return rc(8,12,24,14,OL)+rc(9,13,22,12,"#8a5a3a")+`<path d="M14 12 Q20 2 26 12" fill="none" stroke="${OL}" stroke-width="2"/>`+rc(18,17,4,3,"#f2c94c");
  if(it.id==="lux_s")return rc(10,4,20,24,OL)+rc(11,5,18,22,"#2b2b3a")+`<polygon points="16,5 20,14 24,5" fill="#fff"/>`+rc(19,9,2,10,"#d6453d");
@@ -2037,7 +2083,7 @@ function openMall(){let el=document.getElementById("mall");if(!el){el=document.c
  ${cats.map(ct=>`<h3>${ct}</h3><div class="m-grid">${MALL.filter(x=>x.c===ct).map(it=>{const down=Math.round(it.p*0.3),canLoan=it.home&&s.money>=down&&monthPay()>=it.p*0.7*0.045/12*2;const canCash=s.money>=it.p;const owned=it.once===undefined&&!it.home&&(s.assets||[]).some(x=>x.id===it.id);
   return `<div class="m-card"><svg viewBox="0 0 40 30" shape-rendering="crispEdges">${mallIcon(it)}</svg><div class="m-info"><b>${esc(it.n)}</b><span class="m-p">${W(it.p)}</span><small>${esc(it.d)}${it.up?` · 유지비 월 ${W(it.up)}`:""}${it.mind?` · 멘탈 +${it.mind}`:""}${it.rep?` · 평판 ${it.rep>0?"+":""}${it.rep}`:""}</small></div>
   <div class="m-btns"><button class="go" data-mbuy="${it.id}" ${canCash&&!owned?"":"disabled"}>${owned?"보유 중":"구매"}</button>${it.home?`<button data-mbuy="${it.id}" data-loan="1" ${canLoan&&!canCash?"":"disabled"}>대출 끼고 구매<small>계약금 ${W(down)}</small></button>`:""}</div></div>`}).join("")}</div>`).join("")}
- <p class="note">부동산 가격은 매달 조금씩 오르내리고, 차는 매달 1%씩 가치가 떨어져요. 대출 이자는 연 4.5%예요.</p></div>`;
+ <p class="note">부동산 가격은 매년 오르내리고(−6%~+10%), 차는 매년 12%씩 가치가 떨어져요. 대출 이자는 연 4.5%예요.</p></div>`;
 }
 function mallBuy(id,loan){const it=MALL.find(x=>x.id===id);if(!it)return;let ln=0;
  if(loan){const down=Math.round(it.p*0.3);if(s.money<down)return;ln=Math.min(it.p*0.7,it.p-Math.min(s.money,it.p));s.money-=it.p-ln}else{if(s.money<it.p)return;s.money-=it.p}
@@ -2048,7 +2094,7 @@ function mallBuy(id,loan){const it=MALL.find(x=>x.id===id);if(!it)return;let ln=
 function mallSell(i){const x=(s.assets||[])[i];if(!x||!x.sell)return;s.money+=x.value-(x.loan||0);s.assets.splice(i,1);log(`[쇼핑] ${x.n}을(를) ${W(x.value)}에 팔았다.`);sfxPlay("coin");save()}
 function repayLoan(){(s.assets||[]).forEach(x=>{if(x.loan&&s.money>0){const p=Math.min(x.loan,s.money);x.loan-=p;s.money-=p}});log("[대출] 대출을 갚았다.");save()}
 function assetHTML(){if(!s.job)return "";const A=s.assets||[];return `<div class="recap" style="background:light-dark(#eef6ff,#1c2433);border-color:#7ea6ec"><h3>자산 결산</h3><div class="recap-grid"><div><span>최종 직급</span><b>${esc(TRACK[s.job.track].ranks[s.job.rank])}</b></div><div><span>순자산</span><b>${W(netWorth())}</b></div><div><span>대출</span><b>${W(loans())}</b></div><div><span>실적</span><b>${s.job.perf}</b></div></div>${A.length?`<p class="note" style="margin:8px 0 0">보유: ${A.map(x=>esc(x.n)).join(", ")}</p>`:""}</div>`}
-const CEV=["c_audit","c_mistake","c_claim","c_scout","c_invest","c_health","c_lecture","c_book","c_jeonse","c_dinner","c_junior","c_fraud","c_wedding","c_parents","c_burn","c_dealer","c_mate_col","c_mate_rival","c_mate_ask"];
+const CEV=["c_audit","c_mistake","c_claim","c_scout","c_invest","c_health","c_lecture","c_book","c_jeonse","c_dinner","c_junior","c_fraud","c_wedding","c_parents","c_burn","c_dealer","c_mate_col","c_mate_rival","c_mate_ask","c_blind","c_pen","c_date","c_baby","c_ethics","c_inherit","c_mentor","c_refund","c_unpaid","c_startup","c_seminar","c_offer"];
 
 function carPx(x,y,id){const c={car_s:"#f2c94c",car_m:"#7a8aa0",car_l:"#2b2b3a",car_x:"#d6453d"}[id]||"#7a8aa0";const w=id==="car_x"?30:26;
  return rc(x,y+4,w,7,OL)+rc(x+1,y+5,w-2,5,c)+rc(x+5,y,w-11,5,OL)+rc(x+6,y+1,w-13,4,c)+rc(x+8,y+1,4,3,"#bfe3ff")+rc(x+14,y+1,4,3,"#bfe3ff")+rc(x+3,y+9,6,5,OL)+rc(x+4,y+10,4,3,"#9aa3b5")+rc(x+w-9,y+9,6,5,OL)+rc(x+w-8,y+10,4,3,"#9aa3b5")+(id==="car_x"?rc(x+w-3,y+5,3,2,"#ffd34d"):"")}
@@ -2117,11 +2163,11 @@ function altNext(){const a=A(),q=a.quiz;q.fb=null;q.i++;if(q.i>=q.items.length){
 function altAfter(c){const a=A(),K=a.kind;
  if(c==="retry"){a.t=0;a.len=ALT[K].len;a.quiz=null;a.res=null;a.tries++;if(K==="law"){a.t=5}log(`[재도전] ${ALT[K].exam}에 다시 도전한다.`);save();render();return}
  a.on=0;s.alt=null;
- if(c==="pass"){if(K==="gov"){startGovCareer();return}if(K==="leet"){startAlt("law",1);return}finish("E_lawschool");return}
+ if(c==="pass"){if(K==="gov"){startGovCareer();return}if(K==="leet"){startAlt("law",1);return}Object.assign(NODES,NODES_LOVE);s.mode="story";s.node="a_lawyer";save();render();return}
  if(K==="gov"){if(a.from&&!s.careerDone){startCareer("a_local");return}finish(a.from?"E_local":"E_quit");return}
  if(K==="leet"){finish("E_inhouse");return}
  finish("E_lawback")}
-function startGovCareer(){s.job={on:1,track:"gov",next:"E_gov",m:0,months:24,y0:s.ey+1,mo0:1,perf:0,skill:20,clients:0,rank:0};s.assets=s.assets||[];s.mode="career";
+function startGovCareer(){s.job={on:1,track:"gov",next:"E_gov",m:0,months:30,y0:s.ey+1,mo0:1,perf:0,skill:20,clients:0,rank:0};s.assets=s.assets||[];s.mode="career";
  log("[임용] 7급 세무직 공무원으로 세무서에 발령받았다.");popup("7급 주무관 임용!","세무서 조사과로 첫 출근. 2년 동안 공무원 생활을 해 보자.",null,[]);save();render()}
 function altCard(c){const a=A(),K=ALT[a.kind];
  if(a.res){const r=a.res;const retry=a.kind==="law"?a.tries<2:a.tries<3;
@@ -2386,7 +2432,7 @@ function renderStage(){
  const svg=$("stagesvg");if(!svg)return;
  const raw=idleScene();svg.innerHTML=raw.startsWith("<defs>")?raw:DEFS+raw+VIG;$("floats").innerHTML="";
  const P=PH[s.phase];const c=P?cal(Math.min(s.t,P.weeks-1)):null;
- $("nametag").textContent=c?`${c.y}년 ${c.m}월 ${c.w}주차 · ${P.name} 시험 D-${dleft()}주`:`${s.ey}년 · 세무사`;
+ $("nametag").textContent=c?`${c.y}년 ${c.m}월 ${c.w}주차 · ${P.name} 시험 D-${dleft()}주`:s.mode==="career"&&s.job?`${cdate().y}년 · ${TRACK[s.job.track].n} ${TRACK[s.job.track].ranks[s.job.rank]}`:`${s.ey}년 · 세무사`;
 }
 function playScene(a,c,msg){
  busy=true;
@@ -2474,7 +2520,7 @@ async function makeResultCard(){
  x.fillStyle="#1d2433";x.font=`96px ${DH}`;for(const l of wrapText(x,e.t,880)){x.fillText(l,100,y+20);y+=110}
  y+=10;x.fillStyle="#3a4256";x.font=`400 38px ${NS}`;for(const l of wrapText(x,e.d,880).slice(0,6)){x.fillText(l,100,y);y+=58}
  y+=30;
- const chips=[];if(s.flags.dongcha)chips.push("동차 합격");chips.push(`평판 ${Math.round(s.rep)}`);chips.push(`업적 ${gotA.length}/${Object.keys(ACH).length}`);
+ const chips=[];if(s.flags.dongcha)chips.push("동차 합격");if(s.flags.married)chips.push("결혼");chips.push(`평판 ${Math.round(s.rep)}`);chips.push(`업적 ${gotA.length}/${Object.keys(ACH).length}`);
 const yrs=s.ey-START_Y+1;
  x.font=`700 36px ${NS}`;let cx=100;for(const ch of chips){const w=x.measureText(ch).width+56;if(cx+w>980){cx=100;y+=96}x.fillStyle=ch==="동차 합격"?"#d6453d":"#1d2433";x.beginPath();x.roundRect(cx,y-38,w,76,38);x.fill();x.fillStyle="#fff";x.fillText(ch,cx+28,y+2);cx+=w+16}
  y+=80;const bh=Math.min(300,H1-380-y);if(bh>180){x.fillStyle="#fff";x.strokeStyle="#1d2433";x.lineWidth=5;x.beginPath();x.roundRect(100,y,880,bh,24);x.fill();x.stroke();x.fillStyle="#6b7385";x.font=`700 38px ${NS}`;x.textAlign="center";x.fillText("수험 기간",W1/2,y+bh*0.28);x.fillStyle="#d6453d";x.font=`150px ${DH}`;x.fillText(`${yrs}년`,W1/2,y+bh*0.66);x.textAlign="left"}
@@ -2578,6 +2624,7 @@ const NODES={
    if(s.rep>=65)out.push(["대형 법인의 스카우트 제안","높은 평판 덕에 먼저 연락이 왔다. 바로 파트너 트랙으로.","a_grind"]);
    if(exR>=0.18)out.push(["작게, 오래 가는 사무소","수험 내내 지킨 운동 습관처럼 일과 삶의 균형을 지킨다.","E_balance"]);
    out.push(["7급 세무직 공무원 시험","세무사 경력을 살려 국세청으로. 6개월 준비 후 시험","alt_gov"]);
+   out.push(["로스쿨에 도전한다","세무사 + 변호사, 조세 전문가의 끝판왕. 6개월 LEET 준비 → 3년 로스쿨","alt_leet"]);
    return [...out,["대형 세무법인","체계적인 교육, 그리고 악명 높은 신고 시즌. (평판 50 이상)","a_big",50],["로컬 세무사무소","사장님들 장부를 직접 만지는 현장.","a_local"]]}},
  a_big:{t:"첫 법인세 신고 시즌",x:()=>"3월, 새벽 퇴근 3주째. 수험 시절 체력 관리가 이렇게 쓰일 줄이야.",
   c:[["국제조세·조사대응팀 지원","더 어려운 사건을 맡아 보고 싶다.","a_intl"],["버티며 실적을 쌓는다","수험생 때처럼, 끝까지.","a_grind"]]},
@@ -2589,6 +2636,8 @@ const NODES={
   c:[["로스쿨에 지원한다","6개월 준비 후 LEET → 합격하면 3년 로스쿨","alt_leet"],["기업 세무팀으로 옮긴다","","E_inhouse"]]},
  a_local:{t:"동네 사장님들",x:()=>"치킨집, 미용실, 작은 공장. 장부엔 사람 냄새가 난다. 한 고객사가 사내 세무 담당 자리를 제안했다.",
   c:[["독립해서 개업한다","","a_open"],["기업 세무팀으로 간다","","E_inhouse"]]},
+ a_lawyer:{t:"변호사시험 합격!",x:()=>`세무사에 이어 변호사까지. ${s.name?s.name+", ":""}이제 세법과 법을 모두 다루는 사람이 됐다. 어디서 일할까?`,
+  c:[["대형 로펌 조세팀","큰 조세 소송을 맡는 파트너 트랙 (평판 60 이상)","E_lawfirm",60],["재판연구원(로클럭)에 지원","법원에서 조세 사건을 연구한다 (평판 70 이상)","E_clerk",70],["세무·법률 원스톱 사무소 개업","신고부터 소송까지 한곳에서","E_dual"],["조세 전문 변호사로 개업","","E_lawschool"]]},
  a_open:{t:"개업 2년 차",x:()=>"소개로 고객이 늘고 있다. 직원을 더 뽑아 키울까, 지금 규모를 지킬까.",
   c:[["직원을 늘려 키운다","","E_local"],["일부러 작게 유지한다","","E_balance"]]}
 };
@@ -2650,8 +2699,8 @@ function renderSide(){
  $("steps").innerHTML=stepNames.map((n,i)=>`<div class="step ${i===cur?"on":i<cur?"done":""}">${n}</div>`).join("");
  const P=PH[s.phase];const c=cal(Math.min(s.t,P?P.weeks-1:0));
  if(c){$("calm").textContent=`${c.y} · ${c.m}월`;$("calw").textContent=`${c.w}주차`}else{$("calm").textContent=`${s.ey}`;$("calw").textContent="합격"}
- if(s.mode==="career"&&s.job){const d=cdate();$("calm").textContent=`${d.y} · ${d.m}월`;$("calw").textContent=`실무 ${s.job.m+1}개월`}
- const mb=$("mbar");if(mb)mb.innerHTML=`<span>${PH[s.phase]?`<em class="yr">${s.ey-START_Y+1}년차</em> `:""}${c?`${c.m}월 ${c.w}주`:`${s.ey}년`}${PH[s.phase]&&dleft()>0?` · D-${dleft()}주`:""}</span><span>체력 <b>${Math.round(s.hp)}</b> · 멘탈 <b>${Math.round(s.mind)}</b></span><b class="mm ${s.money<0?"neg":""}">${W(s.money)}</b>`;
+ if(s.mode==="career"&&s.job){const d=cdate();$("calm").textContent=`${d.y}년`;$("calw").textContent=`실무 ${s.job.m+1}년 차`}
+ const mb=$("mbar");if(mb)mb.innerHTML=`<span>${PH[s.phase]?`<em class="yr">${s.ey-START_Y+1}년차</em> `:""}${c?`${c.m}월 ${c.w}주`:s.mode==="career"&&s.job?`${cdate().y}년 · <em class="yr">실무 ${s.job.m+1}년</em>`:`${s.ey}년`}${PH[s.phase]&&dleft()>0?` · D-${dleft()}주`:""}</span><span>체력 <b>${Math.round(s.hp)}</b> · 멘탈 <b>${Math.round(s.mind)}</b></span><b class="mm ${s.money<0?"neg":""}">${W(s.money)}</b>`;
  const label=s.phase==="p1"?"1차 객관식":s.phase==="p2"?"2차 동차":s.phase==="p3"?"2차 유예":"세무사의 삶";
  $("phase").innerHTML=`${label}${P?`<br><span class="dday">${P.name} 시험 D-${dleft()}주</span>`:""}<small>${P?courseLabel():"합격 이후의 이야기"}</small>`;
  $("bank").innerHTML=`<span>통장 잔고</span><b id="bankAmt" class="${s.money<0?"neg":""}">${W(s.money)}</b><span>${P?`생활비 ${W(weekCost())} / 주`:""}</span>`;
@@ -2668,7 +2717,7 @@ function renderSide(){
  const inv=Object.entries(s.inv).filter(([k,n])=>n>0&&GOODS[k]);
  const buffs=[s.buff.room>0?`독서실 ${s.buff.room}주`:"",s.buff.gym>0?`헬스장 ${s.buff.gym}주`:"",s.buff.vit>0?`비타민 ${s.buff.vit}주`:"",s.buff.ear>0?`귀마개 ${s.buff.ear}주`:"",s.caf>0?`카페인 내성 -${s.caf}%`:""].filter(Boolean);
  const eqs=Object.keys(s.eq).filter(k=>s.eq[k]&&GOODS[k]);
- $("bag").innerHTML=`<h3>가방</h3><div class="chips"><span class="chip static ${s.ink<3?"fail":""}">볼펜 ${s.ink}자루</span><span class="chip static ${s.paper<=2?"fail":""}">연습장 ${s.paper}</span>${s.outfit&&GOODS[s.outfit]?`<span class="chip static eq">착용: ${esc(GOODS[s.outfit].n)}</span>`:""}${eqs.map(k=>`<span class="chip static eq">${esc(GOODS[k].n)}</span>`).join("")}${buffs.map(b=>`<span class="chip static">${b}</span>`).join("")}${inv.map(([k,n])=>{const g=GOODS[k];const used=g.wk&&s.usedWk&&s.usedWk[k]===s.abs;const usable=canShop()&&(!g.ph||g.ph.includes(s.phase))&&!used;return `<span class="chip">${esc(g.n)} ×${n}<button data-use="${k}" ${usable?"":"disabled"}>${used?"다음 주":"사용"}</button></span>`}).join("")}</div>`;
+ $("bag").innerHTML=`<h3>가방</h3><div class="chips"><span class="chip static ${s.ink<3?"fail":""}">볼펜 ${s.ink}자루</span><span class="chip static ${s.paper<=2?"fail":""}">연습장 ${s.paper}</span>${s.outfit&&GOODS[s.outfit]?`<span class="chip static eq">착용: ${esc(GOODS[s.outfit].n)}</span>`:""}${eqs.map(k=>`<span class="chip static eq">${esc(GOODS[k].n)}</span>`).join("")}${buffs.map(b=>`<span class="chip static">${b}</span>`).join("")}${inv.map(([k,n])=>{const g=GOODS[k];const used=g.wk&&s.usedWk&&s.usedWk[k]===s.abs;const usable=canShop()&&(!g.ph||g.ph.includes(s.phase))&&!used;return `<span class="chip">${gi(k)}${esc(g.n)} ×${n}<button data-use="${k}" ${usable?"":"disabled"}>${used?"다음 주":"사용"}</button></span>`}).join("")}</div>`;
  const ST={p1:"1차 준비",p2:"2차 준비",pass:"합격",quit:"포기"};
  const LV={some:"썸",dating:"연애 중",later:"마음 간직",rejected:"차임",ended:"헤어짐"};
  $("mates").innerHTML=`<h3>스터디원</h3>${(s.mates||[]).map((m,i)=>`<div class="mate"><span class="mn">${esc(m.n)}${s.love&&s.love.who===i&&LV[s.love.stage]?`<em class="lv ${s.love.stage}">${LV[s.love.stage]}</em>`:""}</span><span class="ms ${m.st}">${ST[m.st]}</span><span class="track"><i style="width:${m.aff}%"></i></span><span class="n">♥${Math.round(m.aff)}</span></div>`).join("")}${dating()?`<div class="mate"><span class="mn">서운함</span><span class="ms"></span><span class="track"><i style="width:${s.love.upset}%;background:#8a94a8"></i></span><span class="n">${Math.round(s.love.upset)}</span></div><p class="help">연애 중: 공부 효율 -8%, 매주 멘탈 +2. 데이트를 안 하면 서운함이 쌓여요.</p>`:s.love&&s.love.stage==="focus"?`<p class="help">집중 모드: 공부 효율 +3%</p>`:""}`;
@@ -2679,9 +2728,11 @@ function renderSide(){
  $("log").innerHTML=s.log.map(x=>`<div>${esc(x)}</div>`).join("");
  const sg=$("stgains");if(sg){const gh=gainsHTML();if(sg.dataset.k!==gh){sg.dataset.k=gh;sg.innerHTML=gh;const gs=sg.querySelector(".gains");if(gs&&gs.children.length>=7)gs.classList.add("many")}}
 }
+const GICON={book1:"📘",book2:"📗",mock:"📝",coffee:"☕",energy:"⚡",kimbap:"🍙",protein:"🍫",pen:"🖊️",penbox:"📦",paper:"📒",marker:"🖍️",planner:"🗓️",lotto1:"🎟️",lotto5:"🎫",lens:"🔮",timer:"⏱️",vit:"💊",gym:"🏋️",mask:"😴",cushion:"🪑",ear:"🔇",phones:"🎧",movie:"🎬",charm:"🧧",room:"🏫"};
+const gi=k=>GICON[k]?`<span class="gico" aria-hidden="true">${GICON[k]}</span>`:"";
 function goodBtn(k){const g=GOODS[k];
  if(g.outfit){const has=s.wardrobe&&s.wardrobe[k],wear=s.outfit===k;return `<button data-buy="${k}" ${wear||(!has&&s.money<g.p)?"disabled":""}><span class="price">${wear?"착용 중":has?"입기":W(g.p)}</span><span style="display:inline-block;width:12px;height:12px;background:${g.col};border:1px solid #1b1d2b;margin-right:6px;vertical-align:-1px"></span>${esc(g.n)}<small>${esc(has?"보유 중. 누르면 갈아입는다":g.d)}</small></button>`}
- const own=g.eq&&s.eq[k];return `<button data-buy="${k}" ${own||s.money<g.p?"disabled":""}><span class="price">${own?"보유 중":W(g.p)}</span>${esc(g.n)}<small>${esc(g.d)}</small></button>`}
+ const own=g.eq&&s.eq[k];return `<button data-buy="${k}" ${own||s.money<g.p?"disabled":""}><span class="price">${own?"보유 중":W(g.p)}</span>${gi(k)}${esc(g.n)}<small>${esc(g.d)}</small></button>`}
 const GSHORT={"재정학":"재정","세법학개론":"세법","회계학개론":"회계","행정소송법":"행소","회계학 1부":"회계1","회계학 2부":"회계2","세법학 1부":"세법1","세법학 2부":"세법2"};
 function gainsHTML(){
  const sd=(s.sdelta||[]).map(([n,v])=>`<span class="gain ${v>=0?"up":"down"}">${n} ${n==="돈"?(v>=0?"+":"-")+W(Math.abs(v)):(v>=0?"+":"")+v}</span>`).join("");
@@ -2824,7 +2875,7 @@ function renderCard(){
  }else if(s.mode==="ending"){
   const e=ENDS[s.end];const i=Object.keys(ENDS).indexOf(s.end)+1;
   const ks=Object.keys(ENDS);
-  c.innerHTML=`<div class="endart"><svg viewBox="0 0 160 90" shape-rendering="crispEdges" preserveAspectRatio="xMidYMid slice">${endArt(s.end)||""}</svg></div><div class="stamp">엔딩 ${i}</div>${s.name?`<p class="sub" style="margin:0">${esc(s.name)}의 이야기</p>`:""}<h2>${esc(e.t)}</h2><p>${esc(e.d)}</p><p class="sub">${s.ey}년 · 수험 ${s.ey-START_Y+1}년 차${s.flags.dongcha?" · 동차 합격":""} · 평판 ${Math.round(s.rep)} · 남은 잔고 ${W(s.money)}</p><div class="opts"><button class="go rcbtn" data-rcard="1">📸 결과 카드 저장<small>인스타 스토리 크기 이미지로 저장해요</small></button><button class="go" data-new="1">새 게임 시작</button></div>
+  c.innerHTML=`<div class="endart"><svg viewBox="0 0 160 90" shape-rendering="crispEdges" preserveAspectRatio="xMidYMid slice">${endArt(s.end)||""}</svg></div><div class="stamp">엔딩 ${i}</div>${s.name?`<p class="sub" style="margin:0">${esc(s.name)}의 이야기</p>`:""}<h2>${esc(e.t)}</h2><p>${esc(e.d)}</p><p class="sub">${s.ey}년 · 수험 ${s.ey-START_Y+1}년 차${s.flags.dongcha?" · 동차 합격":""}${s.flags.married?` · 💍 ${esc(s.spouse||"배우자")}와 결혼${s.flags.baby?" · 👶 아이 1명":""}`:""} · 평판 ${Math.round(s.rep)} · 남은 잔고 ${W(s.money)}</p><div class="opts"><button class="go rcbtn" data-rcard="1">📸 결과 카드 저장<small>인스타 스토리 크기 이미지로 저장해요</small></button><button class="go" data-new="1">새 게임 시작</button></div>
   <details class="endmore" ${document.body.classList.contains("mob")?"":"open"}><summary>자세한 기록 보기 <small>자산 · 통계 · 성장 그래프 · 업적</small></summary>
   ${assetHTML()}
   ${statsHTML()}
@@ -2871,6 +2922,8 @@ $("card").addEventListener("click",ev=>{
  else if(d.mall)openMall();
  else if(d.new)newGame();
  else if(d.rcard)makeResultCard();
+ else if(d.cjob){const j=J();if(j){if(d.cjob==="open")j.picking=1;else if(d.cjob==="cancel")j.picking=0;else{changeJob(d.cjob);return}save();render()}}
+ else if(d.cend){if(J()&&J().m>=1)endCareer()}
  else if(d.reveal){if(s.res){if(d.reveal==="go"){if(s.res.kind==="p1"){s.res.reveal=3;sfxPlay("drum");const ps=s.res.pass;setTimeout(()=>{if(s.mode==="result"&&s.res&&s.res.reveal===3){if(ps)fanfare("small");else sfxPlay("lose")}},(s.res.rows.length*.8+1.2)*1000)}else s.res.reveal=2}else s.res.reveal=0;save();render()}}
  else if(d.iv!==undefined)internAns(d.iv);
  else if(d.internend){Object.assign(NODES,NODES_LOVE);s.mode="story";s.node=dating()?"a_love":s.love.stage==="later"&&lover()&&lover().aff>=60?"a_later":"a_start";if(NODES[s.node].enter)NODES[s.node].enter();save();render()}
