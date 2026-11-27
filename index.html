@@ -770,6 +770,13 @@ body.mob .mnav{box-shadow:none}
 body.mob .card,body.mob .stage{box-shadow:3px 3px 0 var(--line)}
 /* 무대는 항상 폭 기준으로 크기 결정 (화면 높이에 따라 흔들리지 않게) */
 .stage{width:100%;height:auto;justify-self:stretch;align-self:start;box-sizing:border-box}
+/* 아래 버튼 3개: 제목 줄은 한 줄로 */
+.opts.three button{white-space:nowrap;text-wrap:nowrap;padding-left:9px;padding-right:9px;letter-spacing:-.3px}
+.opts.three button small{white-space:normal;text-wrap:pretty;letter-spacing:0}
+@media(min-width:761px){.opts.three button{font-size:clamp(13px,1.05vw,15px)}}
+body.mob .opts.three{gap:5px}
+body.mob .opts.three button{font-size:12.5px;padding:6px 6px;letter-spacing:-.4px}
+body.mob .opts.three button small{font-size:10.5px}
 </style>
 </head>
 <body>
