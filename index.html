@@ -752,6 +752,13 @@ body.land #card{display:flex;flex-direction:column}
 body.land #card>.desc,body.land #card>.scomp{order:9}
 body.land #card>.opts{order:8;margin-top:6px}
 body.mob .stage{aspect-ratio:32/17}
+/* 모바일 윗줄: 한 줄·간결 */
+body.mob .mbar{padding:7px 12px;gap:8px;font-size:12px;line-height:1.2;white-space:nowrap;flex-wrap:nowrap;overflow:hidden}
+body.mob .mbar>span{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+body.mob .mbar .mm{font:700 13px/1.2 "Noto Sans KR",sans-serif;color:#ffd34d;flex:none;letter-spacing:-.2px}
+body.mob .mbar .mm .mfloat{display:none}
+body.mob .mbar.hit .mm{color:#ff8a7e}body.mob .mbar.gain .mm{color:#7ee2a0}
+body.mob .mbar .yr{margin-right:1px}
 </style>
 </head>
 <body>
