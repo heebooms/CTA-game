@@ -777,6 +777,11 @@ body.mob .card,body.mob .stage{box-shadow:3px 3px 0 var(--line)}
 body.mob .opts.three{gap:5px}
 body.mob .opts.three button{font-size:12.5px;padding:6px 6px;letter-spacing:-.4px}
 body.mob .opts.three button small{font-size:10.5px}
+/* 상점 가기 버튼 눈에 띄게 */
+#toShop{background:#ffd34d;border-color:#d9a400;color:#3a2a00;box-shadow:0 2px 0 #d9a400}
+#toShop::before{content:"🛒 "}
+#toShop:hover:not(:disabled){background:#ffc928}
+#toShop:disabled{background:#f3e7bf;border-color:#e5d49a;color:#9a8a55;box-shadow:none}
 </style>
 </head>
 <body>
@@ -799,7 +804,7 @@ body.mob .opts.three button small{font-size:10.5px}
       <div class="stage" id="stage"><svg id="stagesvg" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="내 캐릭터"></svg><div class="floats" id="floats"></div><div class="stgains" id="stgains" aria-live="polite"></div><div class="tag" id="nametag"></div></div>
       <div class="statrow"><div class="shelf" id="shelf"></div><div class="cond" id="cond"></div></div>
       <div class="bagrow"><div class="bag" id="bag"></div><div class="bag mates" id="mates"></div></div>
-      <details class="info"><summary>시험 정보 · 참고</summary><p>시험 일정은 2026년 시행 일정(1차 4월 25일, 2차 7월 18일)에 맞춘 2027년 예상치예요. 2027년 공식 일정은 큐넷 공고를 확인하세요. 합격 기준은 1차 과목별 40점·평균 60점, 2차 과목별 40점·평균 60점(합격자가 최소합격인원 700명에 못 미치면 고득점순)을 단순화했어요. 1차 선택과목은 상법·민법·행정소송법 중 하나이고, 영어는 공인영어 성적으로 대체해요. 학원비·물건값은 게임용 가격이에요.</p></details>
+      <details class="info"><summary>시험 정보 · 참고</summary><p>시험 일정은 제64회(2027년) 세무사 시험 일정에 맞췄어요: 1차 원서접수 3월 22~26일, 1차 시험 4월 24일(토), 1차 발표 5월 26일(수), 2차 원서접수 6월 14~18일, 2차 시험 7월 24일(토), 최종 발표 11월 17일(수). 게임 달력은 한 달을 4주로 단순화했어요. 정확한 일정은 큐넷 공고를 확인하세요. 합격 기준은 1차 과목별 40점·평균 60점, 2차 과목별 40점·평균 60점(합격자가 최소합격인원 700명에 못 미치면 고득점순)을 단순화했어요. 1차 선택과목은 상법·민법·행정소송법 중 하나이고, 영어는 공인영어 성적으로 대체해요. 학원비·물건값은 게임용 가격이에요.</p></details>
     </div>
     <div class="right">
       <div class="go-row"><button id="toAcad">학원 가기</button><button id="toShop">상점 가기</button></div>
@@ -817,21 +822,21 @@ SUB.p3=SUB.p2;
 const SPD={"재정학":1.35,"행정소송법":1.35,"세법학개론":0.7,"회계학개론":0.7};
 const SPDN={"재정학":"쑥쑥 오름","행정소송법":"쑥쑥 오름","세법학개론":"잘 안 오름","회계학개론":"잘 안 오름"};
 const COLORS=["var(--b1)","var(--b2)","var(--b3)","var(--b4)"];
-const PH={p1:{step:0,m:1,weeks:16,name:"1차"},p2:{step:1,m:5,weeks:11,name:"2차"},p3:{step:2,m:11,weeks:34,name:"2차"}};
+const PH={p1:{step:0,m:1,weeks:16,name:"1차"},p2:{step:1,m:5,weeks:12,name:"2차"},p3:{step:2,m:11,weeks:36,name:"2차"}};
 /* 학원 과정 (학원 시간표 기준) */
 const SEGS=[
  {id:"obj",ph:"p1",from:0,to:8,kinds:{obj:{n:"객관식 종합반",type:"lec",live:1200000,d:"12~2월. 1차 네 과목 객관식 문제풀이 강의"},self_obj:{n:"독학하기 (인강)",type:"lec",online:400000,self:1,d:"혼자 기본서를 보면서 저렴한 단과 인강으로 막히는 부분만 듣는다. 효과는 현장 종합반의 약 80%"}}},
  {id:"final",ph:"p1",from:9,to:15,kinds:{final:{n:"FINAL 모의고사반",type:"mock",live:400000,d:"3~4월. 매주 주말 모의고사 + 해설, 빌보드 순위. 성적이 좋으면 평판·멘탈 상승"}}},
- {id:"p2",ph:"p2",from:0,to:10,kinds:{jh:{n:"동차종합반",type:"lec",live:1500000,d:"5~7월. 2차 네 과목을 강의로 끝까지"},self_jh:{n:"독학하기 (인강)",type:"lec",online:450000,self:1,d:"혼자 연습서를 풀면서 필요한 단과 인강만 골라 듣는다. 효과는 현장 종합반의 약 80%"},gs:{n:"GS 모의고사반",type:"mock",live:600000,d:"5~7월. 주말 모의고사 + 강평, 매주 빌보드. 혼자 진도를 뺄 자신이 있다면"}}},
+ {id:"p2",ph:"p2",from:0,to:11,kinds:{jh:{n:"동차종합반",type:"lec",live:1500000,d:"5~7월. 2차 네 과목을 강의로 끝까지"},self_jh:{n:"독학하기 (인강)",type:"lec",online:450000,self:1,d:"혼자 연습서를 풀면서 필요한 단과 인강만 골라 듣는다. 효과는 현장 종합반의 약 80%"},gs:{n:"GS 모의고사반",type:"mock",live:600000,d:"5~7월. 주말 모의고사 + 강평, 매주 빌보드. 혼자 진도를 뺄 자신이 있다면"}}},
  {id:"r1",ph:"p3",from:0,to:11,kinds:{r1:{n:"유예종합반 1순환",type:"lec",live:1200000,d:"11~1월. 강의 형식으로 2차 전 범위를 깊게"},self_r1:{n:"독학하기 (인강)",type:"lec",online:450000,self:1,d:"혼자 2차 전 범위를 보면서 단과 인강으로 보충한다. 효과는 현장 종합반의 약 80%"}}},
  {id:"r2",ph:"p3",from:12,to:23,kinds:{r2:{n:"유예종합반 2순환",type:"mock",live:700000,d:"2~4월. 주말 모의고사 응시 후 강평, 매주 빌보드 순위"}}},
- {id:"r3",ph:"p3",from:24,to:33,kinds:{r3:{n:"유예종합반 3순환",type:"mock",live:700000,d:"5~7월. 범위가 넓어진 주말 모의고사 + 강평, 매주 빌보드"}}}
+ {id:"r3",ph:"p3",from:24,to:35,kinds:{r3:{n:"유예종합반 3순환",type:"mock",live:700000,d:"5~7월. 범위가 넓어진 주말 모의고사 + 강평, 매주 빌보드"}}}
 ];
 const SEG_TXT={
- obj:()=>`${s.ey}년 1차 시험(4월 말 예상)까지 D-16주. 지금은 학원 객관식 종합반 시즌(12~2월)이다. 어떻게 들을까?`,
+ obj:()=>`${s.ey}년 1차 시험(4월 24일)까지 D-16주. 지금은 학원 객관식 종합반 시즌(12~2월)이다. 어떻게 들을까?`,
  final:()=>"3월, 객관식 종합반이 끝나고 FINAL 시즌이다. 매주 주말 모의고사를 보고 해설을 듣는다. 등록할까?",
- p2:()=>`5월, 1차 합격! ${s.ey}년 2차(7월 중순 예상)까지 D-11주. 강의로 진도를 끝내는 동차종합반, 주말 모의고사와 강평 위주의 GS 모의고사반 중 무엇을 고를까?`,
- r1:()=>`11월, 1차 면제로 ${s.ey}년 7월 2차에 다시 도전한다. D-34주. 유예 1순환은 강의 형식이다.${s.flags.dongBonus?" 동차 때 열심히 해 둔 덕분에 출발선이 앞에 있다.":""}`,
+ p2:()=>`5월, 가채점으로 1차 합격을 확신했다(발표 5월 26일). ${s.ey}년 2차(7월 24일)까지 D-12주. 강의로 진도를 끝내는 동차종합반, 주말 모의고사와 강평 위주의 GS 모의고사반 중 무엇을 고를까?`,
+ r1:()=>`11월, 1차 면제로 ${s.ey}년 7월 24일 2차에 다시 도전한다. D-36주. 유예 1순환은 강의 형식이다.${s.flags.dongBonus?" 동차 때 열심히 해 둔 덕분에 출발선이 앞에 있다.":""}`,
  r2:()=>"2월, 유예 2순환 시작. 이제부터는 매주 주말 모의고사를 보고 강평을 듣는다. 빌보드에 순위가 뜬다.",
  r3:()=>"5월, 유예 3순환. 범위가 확 넓어진 모의고사가 매주 이어진다. 마지막 스퍼트."
 };
@@ -976,7 +981,7 @@ function showPopup(t,x,scene,ch,opt){const el=document.getElementById("popup");i
  const A=scene&&EV_ART[scene]?(evArt(EV_ART[scene])||evArt2(EV_ART[scene])):null;const noImg=scene===null;
  el.innerHTML=`<div class="pp-card" role="status" aria-label="${esc(t)}">${noImg?"":A?`<svg viewBox="0 0 160 90" shape-rendering="crispEdges" preserveAspectRatio="xMidYMid slice">${A}</svg>`:`<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice">${sceneSVG(EV_SCENE[scene]||scene||"study")}</svg>`}<div class="pp-body"><h3>${esc(t)}</h3><p>${esc(x).replace(/\n/g,"<br>")}</p>${chips?`<div class="gains">${chips}</div>`:""}<small>눌러서 닫기</small></div></div>`;
  el.classList.remove("on");void el.offsetWidth;el.classList.add("on");clearTimeout(showPopup.h);showPopup.h=setTimeout(closePopup,opt.dur||4000)}
-const EV_ART={r_rumor:"phone",r_newed:"notes",r_teacher:"question",r_omr:"question",r_wrist:"back",r_calc:"broke",r_9gup:"party",r_job:"call",r_cafeq:"phone",r_lunch:"money",r_seat:"cafe",r_apply:"laptop",r_hall:"subway",r_hair:"insomnia",r_suki:"notes",r_rain:"storm",r_proof:"phone",r_vatjob:"money",r_caffeine:"insomnia",s_seol:"family",s_chuseok:"family",r_bday:"family",r_mom:"family",r_reunion:"party",r_friend:"party",s_newyear:"newyear",r_wedding:"wedding",r_cold:"sick",
+const EV_ART={r_cheer1:"call",r_cheer2:"cafe",r_cheer3:"phone",r_cheer4:"question",r_cheer5:"notes",r_cheer6:"notes",r_rumor:"phone",r_newed:"notes",r_teacher:"question",r_omr:"question",r_wrist:"back",r_calc:"broke",r_9gup:"party",r_job:"call",r_cafeq:"phone",r_lunch:"money",r_seat:"cafe",r_apply:"laptop",r_hall:"subway",r_hair:"insomnia",r_suki:"notes",r_rain:"storm",r_proof:"phone",r_vatjob:"money",r_caffeine:"insomnia",s_seol:"family",s_chuseok:"family",r_bday:"family",r_mom:"family",r_reunion:"party",r_friend:"party",s_newyear:"newyear",r_wedding:"wedding",r_cold:"sick",
  r_allow:"money",r_scholar:"money",r_gig:"money",r_spend:"broke",r_broke:"broke",r_laptop:"laptop",s_xmas:"xmas",s_vacation:"beach",s_summer:"beach",
  r_some:"rooftop",r_confess:"confess",r_theyconfess:"confess",r_fight:"storm",r_breakup:"storm",r_crisis:"storm",r_noise:"noise",r_senior:"cafe",r_mate1:"cafe",r_mate3:"cafe",
  r_triangle:"triangle",c_audit:"news",c_mistake:"broke",c_claim:"storm",c_scout:"cafe",c_invest:"phone",c_health:"sick",c_lecture:"question",c_book:"notes",c_jeonse:"call",c_dinner:"party",c_junior:"cafe",c_fraud:"storm",c_wedding:"wedding",c_parents:"family",c_burn:"insomnia",c_dealer:"money",l_mid:"question",l_moot:"question",l_loan:"broke",l_clinic:"cafe",l_ta:"notes",l_mock:"insomnia",c_mate_col:"cafe",c_mate_rival:"storm",c_mate_ask:"cafe",__lotto0:"lotto0",__lotto1:"lotto1",r_annoy:"annoy",r_lostbook:"subway",r_blackout:"blackout",r_insomnia:"insomnia",r_sns:"phone",r_call:"call",r_tooth:"dentist",r_lawchange:"news",r_snow:"snow",r_notes:"notes",r_question:"question",r_eyes:"eyes",r_back:"back",r_leave:"leave",r_dog:"dog",r_help:"question",r_study:"cafe",r_lucky:"notes",r_slump:"insomnia",r_jealous:"jealous",r_rival:"jealous",r_matecouple:"couple",r_otherconf:"triangle",r_studydate:"cafe",r_anniv:"gift"};
@@ -1369,6 +1374,12 @@ const EV={
  r_laptop:{t:()=>"노트북 고장",x:()=>"인강 듣던 노트북이 갑자기 꺼졌다.",c:()=>[["수리 맡긴다","",()=>{s.mind-=3;return "수리 완료. 지갑이 가벼워졌다."},150000],["휴대폰으로 버틴다","",()=>{s.focus=Math.max(.55,s.focus-.15);s.mind-=4;return "작은 화면으로 강의를 들었다. 눈이 아프다."}]]},
  r_gig:{t:()=>"단기 알바 제안",x:()=>"아는 형이 이번 주말 행사 스태프 알바를 제안했다. 이틀에 50만 원, 대신 무대 설치부터 철거까지 몸으로 때우는 일이다.",c:()=>[["한다","",()=>{s.money+=500000;s.hp-=18;s.mind-=8;rp(2);return "주말 이틀 내내 무대 장비를 날랐다. ₩500,000을 받았지만 온몸이 쑤시고 머리가 멍하다."}],["거절한다","",()=>{s.mind+=1;rp(-1);return "공부가 먼저다."}]]},
  r_mom:{t:()=>"엄마표 반찬 택배",x:()=>"집에서 반찬 택배가 왔다. 장조림, 멸치볶음, 김치.",c:()=>[["감사히 먹는다","",()=>{s.hp+=8;s.mind+=6;return "집밥의 힘. 체력과 멘탈이 올랐다."}]]},
+ r_cheer1:{t:()=>"부모님의 편지",x:()=>"책상 위에 부모님이 두고 간 편지가 있다. \"몇 년이 걸려도 괜찮아. 우리는 항상 네 편이야.\"",c:()=>[["펑펑 울고 다시 책을 편다","",()=>{s.mind+=12;s.money+=300000;addAll(B()*.4);return "편지 봉투 안에 30만 원이 들어 있었다. 마음이 단단해졌다."}]]},
+ r_cheer2:{t:()=>"합격한 선배의 과외",x:()=>"몇 년 먼저 합격한 선배가 연락을 줬다. \"주말에 시간 되면 약한 과목 같이 봐 줄게.\"",c:()=>[["감사히 배운다","약점 과목 크게 상승",()=>{add(weakest(),B()*2.2);s.mind+=5;rp(2);return "선배의 답안 쓰는 법을 그대로 따라 했다. 약점이 보이기 시작한다."}]]},
+ r_cheer3:{t:()=>"스터디원들의 응원",x:()=>"스터디 단톡방에 응원 메시지가 쏟아졌다. \"올해는 진짜 너 차례야!\"",c:()=>[["고맙다고 답장한다","",()=>{s.mind+=10;(s.mates||[]).forEach(m=>m.aff=clamp(m.aff+4));addAll(B()*.6);return "혼자가 아니라는 생각에 힘이 난다."}]]},
+ r_cheer4:{t:()=>"강사의 개인 피드백",x:()=>"답안을 본 강사가 따로 불렀다. \"실력은 이미 합격권이에요. 이 습관 하나만 고치면 됩니다.\"",c:()=>[["조언대로 고친다","전 과목 실력 상승",()=>{addAll(B()*1.1);s.mind+=6;return "고칠 점이 딱 하나라니. 끝이 보이기 시작했다."}]]},
+ r_cheer5:{t:()=>"N수 합격 수기",x:()=>"\"5수 끝에 합격했습니다\"라는 수기를 읽었다. 나보다 더 오래 버틴 사람도 결국 붙었다.",c:()=>[["나도 할 수 있다","",()=>{s.mind+=9;add(weakest(),B()*.8);return "포기하지 않으면 붙는다. 오늘 공부가 유난히 잘된다."}]]},
+ r_cheer6:{t:()=>"이번엔 감이 온다",x:()=>"모의고사 채점을 해 보니 처음으로 전 과목이 과락을 넘었다. 몸이 기억하기 시작했다.",c:()=>[["이 감각을 유지한다","",()=>{addAll(B()*.9);s.mind+=7;rp(1);return "몇 년간 쌓인 게 헛되지 않았다."}]]},
  r_lucky:{t:()=>"적중 예감?",x:()=>"스터디원이 '올해 무조건 나온다'는 주제를 알려 줬다. 믿어 볼까?",
   c:()=>[["그 주제를 파 본다","",()=>{const k=subs()[Math.floor(Math.random()*4)];if(Math.random()<.5){add(k,6*EVK());s.mind+=3;return `적중 예감! ${k} 실력 상승.`}s.mind-=3;s.hp-=2;return "알고 보니 작년에 나온 주제였다…"}],["하던 대로 한다","",()=>{s.mind+=3;rp(1);return "흔들리지 않기로 했다."}]]},
  r_scholar:{t:()=>"성적 장학금",x:()=>"학원 모의고사 성적 우수자로 뽑혔다!",ok:()=>reg()&&reg().m==="live"&&s.lastBB&&(s.lastBB<=40||(s.rep>=60&&s.lastBB<=80)),
@@ -1470,6 +1481,8 @@ function startTurn(){
  // 썸 시작은 스터디를 한 주에만, 높은 확률로
  if(s.lastGrp>0&&s.abs>=4)for(const k of shuffle(["r_some","r_triangle"]))if(!(s.cool[k]>s.abs)&&EV[k].ok()&&Math.random()<.2+.15*Math.min(3,s.lastGrp)){s.cool[k]=s.abs+8;s.ev=k;s.mode="event";return}
  for(const k of shuffle(["r_jealous","r_rival","r_matecouple","r_otherconf","r_studydate","r_anniv"]))if(!(s.cool[k]>s.abs)&&EV[k].ok()&&Math.random()<.1){s.cool[k]=s.abs+12;s.ev=k;s.mode="event";return}
+ // 수험 3년차부터 응원·격려 이벤트 비중을 높임 (4년 안에 붙도록)
+ {const yr=s.ey-START_Y+1;if(PH[s.phase]&&yr>=3){const pc=yr>=5?.5:yr>=4?.35:.15;const cp=["r_cheer1","r_cheer2","r_cheer3","r_cheer4","r_cheer5","r_cheer6"].filter(k=>!(s.cool[k]>s.abs));if(cp.length&&Math.random()<pc){const k=cp[Math.floor(Math.random()*cp.length)];s.cool[k]=s.abs+14;s.ev=k;s.mode="event";return}}}
  if(Math.random()<.4){
   const pool=RAND.filter(k=>(!EV[k].ok||EV[k].ok())&&!(s.cool[k]>s.abs));
   if(pool.length){const k=pool[Math.floor(Math.random()*pool.length)];s.cool[k]=s.abs+20;s.ev=k;s.mode="event";return}
@@ -2430,7 +2443,7 @@ function revealCard(c){
   const verdict=r.pass?`<div class="annc-res ok late" style="animation-delay:${(t0+.8).toFixed(1)}s"><div class="stamp">합격 확실</div><p>과락 없이 평균 ${r.avg.toFixed(2)}점.<br><b>1차 합격이다!</b></p></div>`:`<div class="annc-res no late" style="animation-delay:${(t0+.8).toFixed(1)}s"><p>${fails?`과락 ${fails}과목…`:`평균 ${r.avg.toFixed(2)}점. 합격선 60점에 ${(60-r.avg).toFixed(2)}점 모자란다…`}<br>올해 1차는 어렵겠다.</p></div>`;
   c.innerHTML=head+`<h2>답안 맞춰 보는 중…</h2><div class="annc-score">${rows}<div class="avg" style="animation-delay:${t0.toFixed(1)}s"><span>평균</span><b>${r.avg.toFixed(2)}점</b></div></div>${verdict}<button class="go late" style="animation-delay:${(t0+1.4).toFixed(1)}s" data-reveal="done">성적표 보기</button></div>`;return}
  const head=`<div class="annc"><div class="annc-top">국가전문자격시험 · 합격자 발표</div><h2>제${n}회 세무사 제2차 시험<br>최종 합격자 조회</h2>`;
- if(r.reveal===1){c.innerHTML=head+`<p class="sub">시험이 끝나고 석 달. 오늘이 발표날이다.</p><div class="annc-f"><span>성명</span><b>${nm}</b></div><div class="annc-f"><span>수험번호</span><b>${no}</b></div><button class="go" data-reveal="go">조회하기</button></div>`;return}
+ if(r.reveal===1){c.innerHTML=head+`<p class="sub">시험이 끝나고 넉 달. 11월 17일, 드디어 발표날이다.</p><div class="annc-f"><span>성명</span><b>${nm}</b></div><div class="annc-f"><span>수험번호</span><b>${no}</b></div><button class="go" data-reveal="go">조회하기</button></div>`;return}
  if(r.reveal===2){c.innerHTML=head+`<div class="annc-f"><span>수험번호</span><b>${no}</b></div><div class="annc-load"><div class="annc-bar"><i></i></div><p>조회 중입니다…</p><p class="beat">두근… 두근…</p></div></div>`;
   if(!revealT){sfxPlay("drum");revealT=setTimeout(()=>{revealT=null;if(s.mode==="result"&&s.res&&s.res.reveal===2){s.res.reveal=3;save();render();if(s.res.pass)fanfare("big");else sfxPlay("lose")}},2900)}return}
  c.innerHTML=head+(r.pass?`<div class="annc-res ok"><div class="stamp">합격</div><p><b>축하합니다!</b></p><p>${nm} 님(수험번호 ${no})은<br>제${n}회 세무사 제2차 시험에<br><b>최종 합격</b>하셨습니다.</p></div>`:`<div class="annc-res no"><p>${nm} 님(수험번호 ${no})은<br>제${n}회 세무사 제2차 시험<br>합격자 명단에 없습니다.</p></div>`)+`<button class="go" data-reveal="done">성적 확인하기</button></div>`;
